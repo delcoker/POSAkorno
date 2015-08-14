@@ -80,7 +80,7 @@
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Padding = new System.Windows.Forms.Padding(7, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(724, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(954, 24);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -294,19 +294,18 @@
             this.gpbMain.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gpbMain.Location = new System.Drawing.Point(0, 24);
             this.gpbMain.Name = "gpbMain";
-            this.gpbMain.Size = new System.Drawing.Size(724, 535);
+            this.gpbMain.Size = new System.Drawing.Size(954, 641);
             this.gpbMain.TabIndex = 1;
             this.gpbMain.TabStop = false;
             // 
             // btnLg
             // 
-            this.btnLg.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnLg.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnLg.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLg.ForeColor = System.Drawing.SystemColors.HotTrack;
-            this.btnLg.Location = new System.Drawing.Point(14, 354);
+            this.btnLg.Location = new System.Drawing.Point(12, 419);
             this.btnLg.Name = "btnLg";
-            this.btnLg.Size = new System.Drawing.Size(325, 128);
+            this.btnLg.Size = new System.Drawing.Size(462, 192);
             this.btnLg.TabIndex = 7;
             this.btnLg.Text = "&Login / Logout";
             this.btnLg.UseVisualStyleBackColor = true;
@@ -325,12 +324,11 @@
             // 
             // btnExt
             // 
-            this.btnExt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnExt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnExt.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnExt.Location = new System.Drawing.Point(387, 354);
+            this.btnExt.Location = new System.Drawing.Point(480, 419);
             this.btnExt.Name = "btnExt";
-            this.btnExt.Size = new System.Drawing.Size(325, 128);
+            this.btnExt.Size = new System.Drawing.Size(462, 192);
             this.btnExt.TabIndex = 6;
             this.btnExt.Text = "&Exit";
             this.btnExt.UseVisualStyleBackColor = true;
@@ -338,12 +336,11 @@
             // 
             // btnMeals
             // 
-            this.btnMeals.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnMeals.Anchor = System.Windows.Forms.AnchorStyles.Left;
             this.btnMeals.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnMeals.Location = new System.Drawing.Point(14, 187);
+            this.btnMeals.Location = new System.Drawing.Point(12, 219);
             this.btnMeals.Name = "btnMeals";
-            this.btnMeals.Size = new System.Drawing.Size(325, 128);
+            this.btnMeals.Size = new System.Drawing.Size(462, 192);
             this.btnMeals.TabIndex = 4;
             this.btnMeals.Tag = "5";
             this.btnMeals.Text = "&Dishes";
@@ -352,12 +349,11 @@
             // 
             // btnInv
             // 
-            this.btnInv.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnInv.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.btnInv.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnInv.Location = new System.Drawing.Point(387, 187);
+            this.btnInv.Location = new System.Drawing.Point(480, 219);
             this.btnInv.Name = "btnInv";
-            this.btnInv.Size = new System.Drawing.Size(325, 128);
+            this.btnInv.Size = new System.Drawing.Size(462, 192);
             this.btnInv.TabIndex = 2;
             this.btnInv.Tag = "5";
             this.btnInv.Text = "&Inventory";
@@ -366,12 +362,11 @@
             // 
             // btnRprt
             // 
-            this.btnRprt.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnRprt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnRprt.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnRprt.Location = new System.Drawing.Point(387, 20);
+            this.btnRprt.Location = new System.Drawing.Point(480, 20);
             this.btnRprt.Name = "btnRprt";
-            this.btnRprt.Size = new System.Drawing.Size(325, 128);
+            this.btnRprt.Size = new System.Drawing.Size(462, 192);
             this.btnRprt.TabIndex = 1;
             this.btnRprt.Tag = "5";
             this.btnRprt.Text = "&Report";
@@ -380,12 +375,10 @@
             // 
             // btnSale
             // 
-            this.btnSale.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left)));
             this.btnSale.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSale.Location = new System.Drawing.Point(14, 20);
+            this.btnSale.Location = new System.Drawing.Point(12, 20);
             this.btnSale.Name = "btnSale";
-            this.btnSale.Size = new System.Drawing.Size(325, 128);
+            this.btnSale.Size = new System.Drawing.Size(462, 192);
             this.btnSale.TabIndex = 0;
             this.btnSale.Tag = "5";
             this.btnSale.Text = "&Sale";
@@ -399,10 +392,10 @@
             this.toolStripStatusLabelUser,
             this.toolStripStatusLabelDate,
             this.toolStripProgressBarMain});
-            this.statusStrip1.Location = new System.Drawing.Point(0, 532);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 638);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Padding = new System.Windows.Forms.Padding(1, 0, 16, 0);
-            this.statusStrip1.Size = new System.Drawing.Size(724, 27);
+            this.statusStrip1.Size = new System.Drawing.Size(954, 27);
             this.statusStrip1.TabIndex = 5;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -439,14 +432,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(724, 559);
+            this.ClientSize = new System.Drawing.Size(954, 665);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.gpbMain);
             this.Controls.Add(this.menuStrip1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.MainMenuStrip = this.menuStrip1;
-            this.MaximumSize = new System.Drawing.Size(812, 630);
-            this.MinimumSize = new System.Drawing.Size(740, 598);
+            this.MinimumSize = new System.Drawing.Size(970, 704);
             this.Name = "Mainform";
             this.Text = "Main";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;

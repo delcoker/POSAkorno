@@ -214,7 +214,7 @@ namespace POS
             if (!loadUserDetails(status))
             {
                 status = false;
-                while (!status)
+                if (!status)
                 {
                     MessageBox.Show("Please log in again");
                     if (loginSuccess())
@@ -222,6 +222,7 @@ namespace POS
                         status = true;
                     }
                 }
+                
             }
             return status;
         }
