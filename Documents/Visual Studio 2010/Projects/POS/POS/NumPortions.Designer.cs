@@ -67,6 +67,7 @@
             // 
             // btnCncl
             // 
+            this.btnCncl.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCncl.Font = new System.Drawing.Font("Microsoft Sans Serif", 26.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCncl.Location = new System.Drawing.Point(12, 232);
             this.btnCncl.Name = "btnCncl";
@@ -91,6 +92,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnCncl;
             this.ClientSize = new System.Drawing.Size(181, 330);
             this.Controls.Add(this.llblLog);
             this.Controls.Add(this.btnCncl);

@@ -39,6 +39,9 @@
             this.dtpDtAdd = new System.Windows.Forms.DateTimePicker();
             this.lblQty = new System.Windows.Forms.Label();
             this.pEdt = new System.Windows.Forms.Panel();
+            this.gpbx = new System.Windows.Forms.GroupBox();
+            this.rdbDeduct = new System.Windows.Forms.RadioButton();
+            this.rdbAddition = new System.Windows.Forms.RadioButton();
             this.dtpDateAdded = new System.Windows.Forms.DateTimePicker();
             this.cmbItems = new System.Windows.Forms.ComboBox();
             this.numQty = new System.Windows.Forms.NumericUpDown();
@@ -50,8 +53,10 @@
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.pMealEdit = new System.Windows.Forms.Panel();
             this.llblLog = new System.Windows.Forms.LinkLabel();
+            this.btnAddItem = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInv)).BeginInit();
             this.pEdt.SuspendLayout();
+            this.gpbx.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numQty)).BeginInit();
             this.menuStrip1.SuspendLayout();
             this.pMealEdit.SuspendLayout();
@@ -61,12 +66,12 @@
             // 
             this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnAdd.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdd.Location = new System.Drawing.Point(6, 556);
+            this.btnAdd.Location = new System.Drawing.Point(6, 525);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(93, 31);
+            this.btnAdd.Size = new System.Drawing.Size(133, 31);
             this.btnAdd.TabIndex = 3;
             this.btnAdd.Tag = "3";
-            this.btnAdd.Text = "Quick Add";
+            this.btnAdd.Text = "&Add Stock";
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
@@ -84,12 +89,12 @@
             // 
             this.btnEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnEdit.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEdit.Location = new System.Drawing.Point(666, 43);
+            this.btnEdit.Location = new System.Drawing.Point(604, 42);
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(184, 94);
+            this.btnEdit.Size = new System.Drawing.Size(255, 94);
             this.btnEdit.TabIndex = 0;
             this.btnEdit.Tag = "3";
-            this.btnEdit.Text = "Edit";
+            this.btnEdit.Text = "Edit Stock";
             this.btnEdit.UseVisualStyleBackColor = true;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
@@ -97,12 +102,12 @@
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSave.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Location = new System.Drawing.Point(666, 284);
+            this.btnSave.Location = new System.Drawing.Point(604, 283);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(184, 94);
+            this.btnSave.Size = new System.Drawing.Size(255, 94);
             this.btnSave.TabIndex = 1;
             this.btnSave.Tag = "3";
-            this.btnSave.Text = "Save";
+            this.btnSave.Text = "Add / Deduct";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
@@ -110,9 +115,9 @@
             // 
             this.btnDel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDel.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDel.Location = new System.Drawing.Point(666, 161);
+            this.btnDel.Location = new System.Drawing.Point(604, 160);
             this.btnDel.Name = "btnDel";
-            this.btnDel.Size = new System.Drawing.Size(184, 94);
+            this.btnDel.Size = new System.Drawing.Size(255, 94);
             this.btnDel.TabIndex = 2;
             this.btnDel.Tag = "3";
             this.btnDel.Text = "Delete";
@@ -122,10 +127,11 @@
             // btnClose
             // 
             this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnClose.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClose.Location = new System.Drawing.Point(666, 493);
+            this.btnClose.Location = new System.Drawing.Point(604, 462);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(184, 94);
+            this.btnClose.Size = new System.Drawing.Size(255, 94);
             this.btnClose.TabIndex = 4;
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
@@ -152,7 +158,7 @@
             this.dgvInv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvInv.Location = new System.Drawing.Point(6, 43);
             this.dgvInv.Name = "dgvInv";
-            this.dgvInv.Size = new System.Drawing.Size(641, 335);
+            this.dgvInv.Size = new System.Drawing.Size(583, 333);
             this.dgvInv.TabIndex = 22;
             this.dgvInv.Click += new System.EventHandler(this.dgvInv_Click);
             // 
@@ -161,7 +167,7 @@
             this.dtpDtAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.dtpDtAdd.Enabled = false;
             this.dtpDtAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtpDtAdd.Location = new System.Drawing.Point(416, 565);
+            this.dtpDtAdd.Location = new System.Drawing.Point(358, 534);
             this.dtpDtAdd.Name = "dtpDtAdd";
             this.dtpDtAdd.Size = new System.Drawing.Size(231, 22);
             this.dtpDtAdd.TabIndex = 13;
@@ -172,23 +178,57 @@
             this.lblQty.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lblQty.Location = new System.Drawing.Point(3, 49);
             this.lblQty.Name = "lblQty";
-            this.lblQty.Size = new System.Drawing.Size(115, 20);
+            this.lblQty.Size = new System.Drawing.Size(76, 20);
             this.lblQty.TabIndex = 16;
-            this.lblQty.Text = "Current Stock :";
+            this.lblQty.Text = "Quantity :";
             // 
             // pEdt
             // 
             this.pEdt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.pEdt.Controls.Add(this.gpbx);
             this.pEdt.Controls.Add(this.dtpDateAdded);
             this.pEdt.Controls.Add(this.lblName);
             this.pEdt.Controls.Add(this.lblUpdate);
             this.pEdt.Controls.Add(this.lblQty);
             this.pEdt.Controls.Add(this.cmbItems);
             this.pEdt.Controls.Add(this.numQty);
-            this.pEdt.Location = new System.Drawing.Point(6, 392);
+            this.pEdt.Location = new System.Drawing.Point(6, 382);
             this.pEdt.Name = "pEdt";
-            this.pEdt.Size = new System.Drawing.Size(398, 158);
+            this.pEdt.Size = new System.Drawing.Size(583, 135);
             this.pEdt.TabIndex = 27;
+            // 
+            // gpbx
+            // 
+            this.gpbx.Controls.Add(this.rdbDeduct);
+            this.gpbx.Controls.Add(this.rdbAddition);
+            this.gpbx.Location = new System.Drawing.Point(410, 9);
+            this.gpbx.Name = "gpbx";
+            this.gpbx.Size = new System.Drawing.Size(162, 106);
+            this.gpbx.TabIndex = 29;
+            this.gpbx.TabStop = false;
+            this.gpbx.Text = "Addiion / Deduction";
+            // 
+            // rdbDeduct
+            // 
+            this.rdbDeduct.AutoSize = true;
+            this.rdbDeduct.Location = new System.Drawing.Point(7, 75);
+            this.rdbDeduct.Name = "rdbDeduct";
+            this.rdbDeduct.Size = new System.Drawing.Size(60, 17);
+            this.rdbDeduct.TabIndex = 1;
+            this.rdbDeduct.TabStop = true;
+            this.rdbDeduct.Text = "Deduct";
+            this.rdbDeduct.UseVisualStyleBackColor = true;
+            // 
+            // rdbAddition
+            // 
+            this.rdbAddition.AutoSize = true;
+            this.rdbAddition.Location = new System.Drawing.Point(7, 31);
+            this.rdbAddition.Name = "rdbAddition";
+            this.rdbAddition.Size = new System.Drawing.Size(44, 17);
+            this.rdbAddition.TabIndex = 0;
+            this.rdbAddition.TabStop = true;
+            this.rdbAddition.Text = "Add";
+            this.rdbAddition.UseVisualStyleBackColor = true;
             // 
             // dtpDateAdded
             // 
@@ -201,6 +241,7 @@
             // 
             // cmbItems
             // 
+            this.cmbItems.Enabled = false;
             this.cmbItems.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbItems.Location = new System.Drawing.Point(152, 6);
             this.cmbItems.Name = "cmbItems";
@@ -211,6 +252,11 @@
             // 
             this.numQty.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.numQty.Location = new System.Drawing.Point(152, 47);
+            this.numQty.Maximum = new decimal(new int[] {
+            9999,
+            0,
+            0,
+            0});
             this.numQty.Name = "numQty";
             this.numQty.Size = new System.Drawing.Size(238, 26);
             this.numQty.TabIndex = 1;
@@ -257,7 +303,7 @@
             // 
             // statusStrip1
             // 
-            this.statusStrip1.Location = new System.Drawing.Point(0, 598);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 559);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(862, 22);
             this.statusStrip1.TabIndex = 22;
@@ -265,6 +311,7 @@
             // 
             // pMealEdit
             // 
+            this.pMealEdit.Controls.Add(this.btnAddItem);
             this.pMealEdit.Controls.Add(this.pEdt);
             this.pMealEdit.Controls.Add(this.btnAdd);
             this.pMealEdit.Controls.Add(this.llblLog);
@@ -277,7 +324,7 @@
             this.pMealEdit.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pMealEdit.Location = new System.Drawing.Point(0, 0);
             this.pMealEdit.Name = "pMealEdit";
-            this.pMealEdit.Size = new System.Drawing.Size(862, 620);
+            this.pMealEdit.Size = new System.Drawing.Size(862, 581);
             this.pMealEdit.TabIndex = 24;
             // 
             // llblLog
@@ -291,14 +338,29 @@
             this.llblLog.TabStop = true;
             this.llblLog.Text = "Log In?";
             // 
+            // btnAddItem
+            // 
+            this.btnAddItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnAddItem.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddItem.Location = new System.Drawing.Point(145, 525);
+            this.btnAddItem.Name = "btnAddItem";
+            this.btnAddItem.Size = new System.Drawing.Size(133, 31);
+            this.btnAddItem.TabIndex = 28;
+            this.btnAddItem.Tag = "3";
+            this.btnAddItem.Text = "Add New &Item";
+            this.btnAddItem.UseVisualStyleBackColor = true;
+            this.btnAddItem.Click += new System.EventHandler(this.button1_Click);
+            // 
             // InventoryView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(862, 620);
+            this.CancelButton = this.btnClose;
+            this.ClientSize = new System.Drawing.Size(862, 581);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.pMealEdit);
+            this.HelpButton = true;
             this.MinimumSize = new System.Drawing.Size(629, 563);
             this.Name = "InventoryView";
             this.Text = "Inventory View";
@@ -306,6 +368,8 @@
             ((System.ComponentModel.ISupportInitialize)(this.dgvInv)).EndInit();
             this.pEdt.ResumeLayout(false);
             this.pEdt.PerformLayout();
+            this.gpbx.ResumeLayout(false);
+            this.gpbx.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numQty)).EndInit();
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
@@ -340,5 +404,9 @@
         private System.Windows.Forms.Panel pMealEdit;
         private System.Windows.Forms.LinkLabel llblLog;
         private System.Windows.Forms.DateTimePicker dtpDateAdded;
+        private System.Windows.Forms.GroupBox gpbx;
+        private System.Windows.Forms.RadioButton rdbDeduct;
+        private System.Windows.Forms.RadioButton rdbAddition;
+        private System.Windows.Forms.Button btnAddItem;
     }
 }

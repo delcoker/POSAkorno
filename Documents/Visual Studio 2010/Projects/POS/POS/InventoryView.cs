@@ -12,6 +12,7 @@ namespace POS
     public partial class InventoryView : Form
     {
         private cUsers loggedUser;
+        private int productID;
         public InventoryView(cUsers user)
         {
             InitializeComponent();
@@ -33,6 +34,9 @@ namespace POS
             loggedUser = user;
 
             llblLog.Text = loggedUser.UserName;
+            productID = 0;
+
+            updateFont();
         }
 
         private void btnEdit_Click(object sender, EventArgs e)
@@ -48,9 +52,13 @@ namespace POS
             }
             
             pEdt.Enabled = true;
+            //dgvInv.Enabled = false;
+
+            //productID
 
             //cmbItems.Enabled = false;
         }
+
 
         private void LoadItems()
         {
@@ -93,11 +101,14 @@ namespace POS
                 dgvInv.Columns[4].Width = 100;
                 //dgvInv.Columns[4].Visible = false;
                 dgvInv.Columns[5].Width = 100;
-                dgvInv.Columns[6].Width = 100;
+                //dgvInv.Columns[].Visible = false;
+                dgvInv.Columns[6].Width = 150;
                 dgvInv.Columns[7].Width = 100;
                 //dgvInv.Columns[7].Visible = false;
                 //dgvInv.Columns[8].Width = 80;
                 //dgvInv.Columns[9].Width = 120;
+                dgvInv.Columns[8].Visible = false;
+                dgvInv.Columns[9].Visible = false;
             }
             catch (Exception ex)
             {
@@ -109,7 +120,15 @@ namespace POS
             }
 
             //pEdt.Enabled = false;
-            dgvInv.Sort(dgvInv.Columns["Name"], ListSortDirection.Ascending);
+            //dgvInv.Sort(dgvInv.Columns["Name"], ListSortDirection.Ascending);
+        }
+
+        private void updateFont()
+        {
+            foreach (DataGridViewColumn c in dgvInv.Columns)
+            {
+                c.DefaultCellStyle.Font = new Font("Arial", 16F, GraphicsUnit.Pixel);
+            }
         }
 
 
@@ -144,6 +163,7 @@ namespace POS
         private void dgvInv_Click(object sender, EventArgs e)
         {
             pEdt.Enabled = false;
+            //dgvInv.Enabled = true;
             try
             {
                 numQty.Value = Convert.ToDecimal(dgvInv["SLeft", dgvInv.CurrentCell.RowIndex].Value);
@@ -153,6 +173,13 @@ namespace POS
             catch (Exception ex)
             {
                 MessageBox.Show("Please add stock to start the inventory count.\n"  + ex.Message);
+                if (!loggedUser.access(Convert.ToInt16(btnAdd.Tag)))
+                {
+                    return;
+                }
+                InventoryAdd inv = new InventoryAdd(loggedUser);
+                inv.ShowDialog();
+                LoadItems();
             }
         }
 
@@ -170,6 +197,72 @@ namespace POS
             {
                 return;
             }
+
+            cInventory inv = new cInventory(0, Convert.ToUInt32(cmbItems.SelectedValue), Convert.ToUInt32(numQty.Value), dtpDtAdd.Value.ToString(), loggedUser.UserID);
+
+            if (inv.checkInventory())
+            {
+                DialogResult dialogResult = MessageBox.Show("This item was already added to or deducted from today. Continue with update?", "Add", MessageBoxButtons.YesNo);
+                if (dialogResult == DialogResult.Yes)
+                {
+
+                    // preventing adding twice to the same item because
+                    //MessageBox.Show("Item not added");
+                    //return;
+                }
+                else
+                {
+                    MessageBox.Show("Item not added");
+                    return;
+                }
+            }
+
+            if (rdbAddition.Checked)
+            {
+
+                if (inv.saveRecord())
+                {
+                    MessageBox.Show("Added");
+                }
+                else
+                {
+                    MessageBox.Show("Sorry could not be added");
+                    return;
+                }
+            }
+            else if (rdbDeduct.Checked)
+            {
+                if (!(Convert.ToInt32(dgvInv["SLeft", dgvInv.CurrentCell.RowIndex].Value) - Convert.ToUInt32(numQty.Value) >= 0))
+                {
+                    MessageBox.Show("Not enough stock on this item");
+                    return;
+                }
+
+                cInventoryDebit invD = new cInventoryDebit(0, Convert.ToUInt32(cmbItems.SelectedValue), Convert.ToUInt32(numQty.Value), dtpDtAdd.Value.ToString(), loggedUser.UserID);
+
+                try
+                {
+                    if (!invD.saveRecord())
+                    {
+                        MessageBox.Show("Could not save to inventory\n");
+                    }
+
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show(ex.Message);
+                    throw ex;
+                }
+
+                MessageBox.Show("Deducted");
+            }
+            else
+            {
+                MessageBox.Show("Please select addition or deduction option");
+                return;
+            }
+            LoadItems();
+            pEdt.Enabled = false;
         }
 
         private void btnAdd_Click(object sender, EventArgs e)
@@ -181,6 +274,19 @@ namespace POS
             InventoryAdd inv = new InventoryAdd(loggedUser);
             inv.ShowDialog();
             LoadItems();
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            if (!loggedUser.access(Convert.ToInt16(btnAdd.Tag)))
+            {
+                return;
+            }
+            this.Close();
+            this.Dispose();
+            MealView inv = new MealView(loggedUser);
+            inv.ShowDialog();
+            //LoadItems();
         }
     }
 }

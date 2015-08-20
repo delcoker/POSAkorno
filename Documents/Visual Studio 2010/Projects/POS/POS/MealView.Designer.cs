@@ -36,6 +36,7 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pMealEdit = new System.Windows.Forms.Panel();
             this.pEdt = new System.Windows.Forms.Panel();
+            this.rdbDeleted = new System.Windows.Forms.RadioButton();
             this.rdbHaveStock = new System.Windows.Forms.RadioButton();
             this.lblName = new System.Windows.Forms.Label();
             this.txtName = new System.Windows.Forms.TextBox();
@@ -53,6 +54,7 @@
             this.dgvCat = new System.Windows.Forms.DataGridView();
             this.dtpDtAdd = new System.Windows.Forms.DateTimePicker();
             this.llblLog = new System.Windows.Forms.LinkLabel();
+            this.btnStock = new System.Windows.Forms.Button();
             this.menuStrip1.SuspendLayout();
             this.pMealEdit.SuspendLayout();
             this.pEdt.SuspendLayout();
@@ -110,6 +112,7 @@
             // 
             // pMealEdit
             // 
+            this.pMealEdit.Controls.Add(this.btnStock);
             this.pMealEdit.Controls.Add(this.pEdt);
             this.pMealEdit.Controls.Add(this.btnAdd);
             this.pMealEdit.Controls.Add(this.btnEdit);
@@ -129,6 +132,7 @@
             // pEdt
             // 
             this.pEdt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.pEdt.Controls.Add(this.rdbDeleted);
             this.pEdt.Controls.Add(this.rdbHaveStock);
             this.pEdt.Controls.Add(this.lblName);
             this.pEdt.Controls.Add(this.txtName);
@@ -143,8 +147,22 @@
             this.pEdt.Size = new System.Drawing.Size(494, 165);
             this.pEdt.TabIndex = 27;
             // 
+            // rdbDeleted
+            // 
+            this.rdbDeleted.AutoCheck = false;
+            this.rdbDeleted.AutoSize = true;
+            this.rdbDeleted.Location = new System.Drawing.Point(388, 47);
+            this.rdbDeleted.Name = "rdbDeleted";
+            this.rdbDeleted.Size = new System.Drawing.Size(74, 20);
+            this.rdbDeleted.TabIndex = 22;
+            this.rdbDeleted.TabStop = true;
+            this.rdbDeleted.Text = "Deleted";
+            this.rdbDeleted.UseVisualStyleBackColor = true;
+            this.rdbDeleted.Click += new System.EventHandler(this.rdbDeleted_Click);
+            // 
             // rdbHaveStock
             // 
+            this.rdbHaveStock.AutoCheck = false;
             this.rdbHaveStock.AutoSize = true;
             this.rdbHaveStock.Location = new System.Drawing.Point(388, 9);
             this.rdbHaveStock.Name = "rdbHaveStock";
@@ -153,6 +171,7 @@
             this.rdbHaveStock.TabStop = true;
             this.rdbHaveStock.Text = "Track Stock";
             this.rdbHaveStock.UseVisualStyleBackColor = true;
+            this.rdbHaveStock.Click += new System.EventHandler(this.rdbHaveStock_Click);
             // 
             // lblName
             // 
@@ -237,12 +256,12 @@
             // 
             this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnAdd.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdd.Location = new System.Drawing.Point(0, 548);
+            this.btnAdd.Location = new System.Drawing.Point(3, 548);
             this.btnAdd.Name = "btnAdd";
-            this.btnAdd.Size = new System.Drawing.Size(93, 31);
+            this.btnAdd.Size = new System.Drawing.Size(135, 31);
             this.btnAdd.TabIndex = 3;
             this.btnAdd.Tag = "4";
-            this.btnAdd.Text = "Quick &Add";
+            this.btnAdd.Text = "&Add New Item";
             this.btnAdd.UseVisualStyleBackColor = true;
             this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
@@ -255,7 +274,7 @@
             this.btnEdit.Size = new System.Drawing.Size(206, 85);
             this.btnEdit.TabIndex = 0;
             this.btnEdit.Tag = "4";
-            this.btnEdit.Text = "&Edit";
+            this.btnEdit.Text = "&Edit Item";
             this.btnEdit.UseVisualStyleBackColor = true;
             this.btnEdit.Click += new System.EventHandler(this.btnEdit_Click);
             // 
@@ -268,7 +287,7 @@
             this.btnSave.Size = new System.Drawing.Size(206, 85);
             this.btnSave.TabIndex = 1;
             this.btnSave.Tag = "4";
-            this.btnSave.Text = "&Save";
+            this.btnSave.Text = "&Save Item";
             this.btnSave.UseVisualStyleBackColor = true;
             this.btnSave.Click += new System.EventHandler(this.btnSave_Click);
             // 
@@ -335,6 +354,19 @@
             this.llblLog.TabStop = true;
             this.llblLog.Text = "Log In?";
             // 
+            // btnStock
+            // 
+            this.btnStock.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnStock.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnStock.Location = new System.Drawing.Point(144, 548);
+            this.btnStock.Name = "btnStock";
+            this.btnStock.Size = new System.Drawing.Size(135, 31);
+            this.btnStock.TabIndex = 28;
+            this.btnStock.Tag = "4";
+            this.btnStock.Text = "Add S&tock";
+            this.btnStock.UseVisualStyleBackColor = true;
+            this.btnStock.Click += new System.EventHandler(this.btnStock_Click);
+            // 
             // MealView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -389,5 +421,7 @@
         private System.Windows.Forms.Panel pEdt;
         private System.Windows.Forms.ToolStripMenuItem aboutToolStripMenuItem;
         private System.Windows.Forms.RadioButton rdbHaveStock;
+        private System.Windows.Forms.RadioButton rdbDeleted;
+        private System.Windows.Forms.Button btnStock;
     }
 }

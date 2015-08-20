@@ -42,6 +42,8 @@
             this.btnClose = new System.Windows.Forms.Button();
             this.pCatV = new System.Windows.Forms.Panel();
             this.pCatAdd = new System.Windows.Forms.Panel();
+            this.chkPassword = new System.Windows.Forms.CheckBox();
+            this.rdbDeactivated = new System.Windows.Forms.RadioButton();
             this.label1 = new System.Windows.Forms.Label();
             this.txtBxPassword = new System.Windows.Forms.TextBox();
             this.cmbType = new System.Windows.Forms.ComboBox();
@@ -73,9 +75,9 @@
             // 
             // statusStrip1
             // 
-            this.statusStrip1.Location = new System.Drawing.Point(0, 573);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 523);
             this.statusStrip1.Name = "statusStrip1";
-            this.statusStrip1.Size = new System.Drawing.Size(954, 22);
+            this.statusStrip1.Size = new System.Drawing.Size(863, 22);
             this.statusStrip1.TabIndex = 20;
             this.statusStrip1.Text = "statusStrip1";
             // 
@@ -93,7 +95,7 @@
             this.helpToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(954, 24);
+            this.menuStrip1.Size = new System.Drawing.Size(863, 24);
             this.menuStrip1.TabIndex = 21;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -113,19 +115,21 @@
             // 
             // btnAdd
             // 
+            this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnAdd.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdd.Location = new System.Drawing.Point(3, 493);
+            this.btnAdd.Location = new System.Drawing.Point(3, 459);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(114, 31);
             this.btnAdd.TabIndex = 4;
             this.btnAdd.Text = "Quick Add";
             this.btnAdd.UseVisualStyleBackColor = true;
+            this.btnAdd.Click += new System.EventHandler(this.btnAdd_Click);
             // 
             // llblLog
             // 
             this.llblLog.AutoSize = true;
             this.llblLog.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.llblLog.Location = new System.Drawing.Point(12, 24);
+            this.llblLog.Location = new System.Drawing.Point(0, 0);
             this.llblLog.Name = "llblLog";
             this.llblLog.Size = new System.Drawing.Size(51, 16);
             this.llblLog.TabIndex = 19;
@@ -137,29 +141,34 @@
             this.dgvUsr.AllowUserToAddRows = false;
             this.dgvUsr.AllowUserToDeleteRows = false;
             this.dgvUsr.AllowUserToOrderColumns = true;
+            this.dgvUsr.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.dgvUsr.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dgvUsr.Location = new System.Drawing.Point(3, 3);
+            this.dgvUsr.Location = new System.Drawing.Point(3, 19);
             this.dgvUsr.Name = "dgvUsr";
-            this.dgvUsr.Size = new System.Drawing.Size(760, 343);
+            this.dgvUsr.Size = new System.Drawing.Size(654, 293);
             this.dgvUsr.TabIndex = 5;
             this.dgvUsr.TabStop = false;
             this.dgvUsr.Click += new System.EventHandler(this.dgvUsr_Click);
             // 
             // dtpDtAdd
             // 
+            this.dtpDtAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.dtpDtAdd.Enabled = false;
             this.dtpDtAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtpDtAdd.Location = new System.Drawing.Point(275, 502);
+            this.dtpDtAdd.Location = new System.Drawing.Point(426, 468);
             this.dtpDtAdd.Name = "dtpDtAdd";
             this.dtpDtAdd.Size = new System.Drawing.Size(231, 22);
             this.dtpDtAdd.TabIndex = 15;
             // 
             // btnClose
             // 
+            this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnClose.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClose.Location = new System.Drawing.Point(769, 418);
+            this.btnClose.Location = new System.Drawing.Point(663, 404);
             this.btnClose.Name = "btnClose";
-            this.btnClose.Size = new System.Drawing.Size(158, 69);
+            this.btnClose.Size = new System.Drawing.Size(188, 86);
             this.btnClose.TabIndex = 5;
             this.btnClose.Text = "Close";
             this.btnClose.UseVisualStyleBackColor = true;
@@ -167,31 +176,64 @@
             // 
             // pCatV
             // 
+            this.pCatV.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
             this.pCatV.Controls.Add(this.pCatAdd);
             this.pCatV.Controls.Add(this.btnAdd);
+            this.pCatV.Controls.Add(this.llblLog);
             this.pCatV.Controls.Add(this.dgvUsr);
             this.pCatV.Controls.Add(this.dtpDtAdd);
             this.pCatV.Controls.Add(this.btnClose);
             this.pCatV.Controls.Add(this.btnDel);
             this.pCatV.Controls.Add(this.btnSave);
             this.pCatV.Controls.Add(this.btnEdit);
-            this.pCatV.Location = new System.Drawing.Point(12, 43);
+            this.pCatV.Location = new System.Drawing.Point(0, 27);
             this.pCatV.Name = "pCatV";
-            this.pCatV.Size = new System.Drawing.Size(930, 527);
+            this.pCatV.Size = new System.Drawing.Size(858, 493);
             this.pCatV.TabIndex = 22;
             // 
             // pCatAdd
             // 
+            this.pCatAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.pCatAdd.Controls.Add(this.chkPassword);
+            this.pCatAdd.Controls.Add(this.rdbDeactivated);
             this.pCatAdd.Controls.Add(this.label1);
             this.pCatAdd.Controls.Add(this.txtBxPassword);
             this.pCatAdd.Controls.Add(this.cmbType);
             this.pCatAdd.Controls.Add(this.tBxFirstName);
             this.pCatAdd.Controls.Add(this.lblName);
             this.pCatAdd.Controls.Add(this.lblType);
-            this.pCatAdd.Location = new System.Drawing.Point(3, 352);
+            this.pCatAdd.Location = new System.Drawing.Point(3, 318);
             this.pCatAdd.Name = "pCatAdd";
-            this.pCatAdd.Size = new System.Drawing.Size(547, 135);
+            this.pCatAdd.Size = new System.Drawing.Size(528, 135);
             this.pCatAdd.TabIndex = 22;
+            // 
+            // chkPassword
+            // 
+            this.chkPassword.AutoCheck = false;
+            this.chkPassword.AutoSize = true;
+            this.chkPassword.Location = new System.Drawing.Point(413, 108);
+            this.chkPassword.Name = "chkPassword";
+            this.chkPassword.Size = new System.Drawing.Size(112, 17);
+            this.chkPassword.TabIndex = 21;
+            this.chkPassword.Text = "Change Password";
+            this.chkPassword.UseVisualStyleBackColor = true;
+            this.chkPassword.Click += new System.EventHandler(this.chkPassword_Click);
+            // 
+            // rdbDeactivated
+            // 
+            this.rdbDeactivated.AutoCheck = false;
+            this.rdbDeactivated.AutoSize = true;
+            this.rdbDeactivated.Checked = true;
+            this.rdbDeactivated.Location = new System.Drawing.Point(413, 14);
+            this.rdbDeactivated.Name = "rdbDeactivated";
+            this.rdbDeactivated.Size = new System.Drawing.Size(83, 17);
+            this.rdbDeactivated.TabIndex = 20;
+            this.rdbDeactivated.TabStop = true;
+            this.rdbDeactivated.Text = "Deactivated";
+            this.rdbDeactivated.UseVisualStyleBackColor = true;
+            this.rdbDeactivated.Click += new System.EventHandler(this.rdbDeactivated_Click);
             // 
             // label1
             // 
@@ -205,9 +247,10 @@
             // 
             // txtBxPassword
             // 
+            this.txtBxPassword.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.txtBxPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txtBxPassword.ImeMode = System.Windows.Forms.ImeMode.NoControl;
-            this.txtBxPassword.Location = new System.Drawing.Point(272, 105);
+            this.txtBxPassword.Location = new System.Drawing.Point(100, 102);
             this.txtBxPassword.Name = "txtBxPassword";
             this.txtBxPassword.PasswordChar = '●';
             this.txtBxPassword.Size = new System.Drawing.Size(272, 26);
@@ -215,17 +258,19 @@
             // 
             // cmbType
             // 
+            this.cmbType.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.cmbType.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cmbType.FormattingEnabled = true;
-            this.cmbType.Location = new System.Drawing.Point(272, 55);
+            this.cmbType.Location = new System.Drawing.Point(100, 55);
             this.cmbType.Name = "cmbType";
             this.cmbType.Size = new System.Drawing.Size(272, 28);
             this.cmbType.TabIndex = 15;
             // 
             // tBxFirstName
             // 
+            this.tBxFirstName.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.tBxFirstName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.tBxFirstName.Location = new System.Drawing.Point(272, 5);
+            this.tBxFirstName.Location = new System.Drawing.Point(100, 8);
             this.tBxFirstName.Name = "tBxFirstName";
             this.tBxFirstName.Size = new System.Drawing.Size(272, 26);
             this.tBxFirstName.TabIndex = 13;
@@ -252,20 +297,23 @@
             // 
             // btnDel
             // 
+            this.btnDel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDel.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDel.Location = new System.Drawing.Point(769, 144);
+            this.btnDel.Location = new System.Drawing.Point(663, 124);
             this.btnDel.Name = "btnDel";
-            this.btnDel.Size = new System.Drawing.Size(158, 69);
+            this.btnDel.Size = new System.Drawing.Size(188, 86);
             this.btnDel.TabIndex = 1;
             this.btnDel.Text = "Delete";
             this.btnDel.UseVisualStyleBackColor = true;
+            this.btnDel.Click += new System.EventHandler(this.btnDel_Click);
             // 
             // btnSave
             // 
+            this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSave.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Location = new System.Drawing.Point(769, 277);
+            this.btnSave.Location = new System.Drawing.Point(663, 226);
             this.btnSave.Name = "btnSave";
-            this.btnSave.Size = new System.Drawing.Size(158, 69);
+            this.btnSave.Size = new System.Drawing.Size(188, 86);
             this.btnSave.TabIndex = 2;
             this.btnSave.Text = "Save";
             this.btnSave.UseVisualStyleBackColor = true;
@@ -273,10 +321,11 @@
             // 
             // btnEdit
             // 
+            this.btnEdit.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnEdit.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnEdit.Location = new System.Drawing.Point(769, 3);
+            this.btnEdit.Location = new System.Drawing.Point(663, 19);
             this.btnEdit.Name = "btnEdit";
-            this.btnEdit.Size = new System.Drawing.Size(158, 69);
+            this.btnEdit.Size = new System.Drawing.Size(188, 86);
             this.btnEdit.TabIndex = 0;
             this.btnEdit.Text = "Edit";
             this.btnEdit.UseVisualStyleBackColor = true;
@@ -286,18 +335,19 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(954, 595);
+            this.ClientSize = new System.Drawing.Size(863, 545);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.menuStrip1);
-            this.Controls.Add(this.llblLog);
             this.Controls.Add(this.pCatV);
+            this.MinimumSize = new System.Drawing.Size(597, 502);
             this.Name = "UserView";
-            this.Text = "Users View";
+            this.Text = "User View / Edit";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgvUsr)).EndInit();
             this.pCatV.ResumeLayout(false);
+            this.pCatV.PerformLayout();
             this.pCatAdd.ResumeLayout(false);
             this.pCatAdd.PerformLayout();
             this.ResumeLayout(false);
@@ -330,6 +380,8 @@
         private System.Windows.Forms.TextBox tBxFirstName;
         private System.Windows.Forms.Label lblName;
         private System.Windows.Forms.Label lblType;
+        private System.Windows.Forms.RadioButton rdbDeactivated;
+        private System.Windows.Forms.CheckBox chkPassword;
 
     }
 }

@@ -29,6 +29,10 @@ namespace POS
             LoadUserTypes();
             LoadUsers();
 
+            loggedUser = new cUsers();
+            loggedUser = user;
+            llblLog.Text = loggedUser.UserName;
+
             Cursor.Current = Cursors.WaitCursor;
         }
 
@@ -39,7 +43,7 @@ namespace POS
             {
                 cUsers user = new cUsers();
                 user.UserID = 0;
-                ds = user.UsersGet();
+                ds = user.UsersGetAll();
 
                 dgvUsr.DataSource = ds.Tables[0];
 
@@ -50,19 +54,24 @@ namespace POS
                 dgvUsr.Columns[4].HeaderText = "Date Added";
                 dgvUsr.Columns[5].HeaderText = "Last Attepted Login";
                 dgvUsr.Columns[6].HeaderText = "Last Login";
+                dgvUsr.Columns[7].HeaderText = "Deactived";
+                dgvUsr.Columns[8].HeaderText = "Position";
 
                 dgvUsr.Columns[0].Visible = false;
                 dgvUsr.Columns[2].Visible = false;
                 dgvUsr.Columns[3].Visible = false;
-                //dgvUsr.Columns[0].Visible = false;
+                dgvUsr.Columns[8].Visible = false;
                 //dgvUsr.Columns[0].Visible = false;
 
                 dgvUsr.Columns[1].Width = 200;
                 dgvUsr.Columns[2].Width = 200;
-                dgvUsr.Columns[3].Width = 200;
-                dgvUsr.Columns[4].Width = 200;
-                dgvUsr.Columns[5].Width = 200;
-                dgvUsr.Columns[6].Width = 200;
+                //dgvUsr.Columns[3].Width = 150;
+                dgvUsr.Columns[4].Width = 150;
+                dgvUsr.Columns[5].Width = 150;
+                dgvUsr.Columns[6].Width = 150;
+                dgvUsr.Columns[6].Width = 150;
+                dgvUsr.Columns[7].Width = 80;
+                dgvUsr.Columns[8].Width = 120;
 
                 
             }
@@ -75,17 +84,18 @@ namespace POS
                 ds.Dispose();
             }
 
-            disableTools();
+            disableTools(false);
             
         }
 
-        private void disableTools()
+        private void disableTools(bool yesOrNo)
         {
-            tBxFirstName.Enabled = false;
-            txtBxPassword.Enabled = false;
-            cmbType.Enabled = false;
+            tBxFirstName.Enabled = yesOrNo;
+            txtBxPassword.Enabled = yesOrNo;
+            cmbType.Enabled = yesOrNo;
             tBxFirstName.Focus();
             txtBxPassword.Clear();
+            chkPassword.Enabled = yesOrNo;
         }
 
         private void LoadUserTypes()
@@ -132,6 +142,7 @@ namespace POS
             string[] names = tBxFirstName.Text.Split();
 
             int usertype = 0;
+            bool deactivate = false;
             cUsers use = new cUsers();
 
             //if (tBxFirstName.Text == "Del")
@@ -143,10 +154,13 @@ namespace POS
             if (tBxFirstName.Text == "Del")
             {
                 names = new string[]{"Del",""};
+                
             }
-             
-                use = new cUsers(names[0], names[1], cUsers.CalculateSHA1(txtBxPassword.Text, Encoding.UTF8), company, Convert.ToUInt16(cmbType.SelectedValue), false, dtpDtAdd.Value.ToString(), dtpDtAdd.Value.ToString(), dtpDtAdd.Value.ToString());
+            
+           
+                use = new cUsers(names[0], names[1], cUsers.CalculateSHA1(txtBxPassword.Text, Encoding.UTF8), company, Convert.ToUInt16(cmbType.SelectedValue), deactivate, dtpDtAdd.Value.ToString(), dtpDtAdd.Value.ToString(), dtpDtAdd.Value.ToString());
             //}
+
             use.UserID = Convert.ToUInt16(dgvUsr["UserID", dgvUsr.CurrentCell.RowIndex].Value);
             
             //if (tBxFirstName.Text == "Del")
@@ -160,10 +174,104 @@ namespace POS
             //{
 
             //}
-
-            if (use.saveRecord())
+            if (chkPassword.Checked)
             {
-                MessageBox.Show("Saved");
+                if (use.saveRecord())
+                {
+                    MessageBox.Show("Saved with password change");
+                    //txtBxPassword.Clear();
+                    //tBxFirstName.Clear();
+                    ////tBxLastName.Clear();
+                    //cmbType.SelectedIndex = -1;
+                    //tBxFirstName.Focus();
+
+                    LoadUsers();
+                }
+            }
+            else
+            {
+                if (use.saveRecordNoPassword())
+                {
+                    MessageBox.Show("Saved with no password change");
+                    //txtBxPassword.Clear();
+                    //tBxFirstName.Clear();
+                    ////tBxLastName.Clear();
+                    //cmbType.SelectedIndex = -1;
+                    //tBxFirstName.Focus();
+
+                    LoadUsers();
+                }
+            }
+            
+        }
+
+        private void btnEdit_Click(object sender, EventArgs e)
+        {
+            if (tBxFirstName.Text == "" || tBxFirstName.Text == null)
+            {
+                MessageBox.Show("Please select whom you would like to edit first");
+                return;
+            }
+
+            disableTools(true);
+
+            if (tBxFirstName.Text == "Del")
+            {
+                disableTools(false);
+                txtBxPassword.Enabled = true;
+                chkPassword.Enabled = true;
+            }
+        }
+
+        private void dgvUsr_Click(object sender, EventArgs e)
+        {
+            disableTools(false);
+            tBxFirstName.Text = dgvUsr["Username", dgvUsr.CurrentCell.RowIndex].Value.ToString();
+            cmbType.SelectedValue = Convert.ToInt16(dgvUsr["PermLevel", dgvUsr.CurrentCell.RowIndex].Value);
+            dtpDtAdd.Value = Convert.ToDateTime(dgvUsr["DateAdded", dgvUsr.CurrentCell.RowIndex].Value);
+            rdbDeactivated.Checked = Convert.ToBoolean(dgvUsr["Deactivate", dgvUsr.CurrentCell.RowIndex].Value);
+            
+       
+        }
+
+        private void btnClose_Click(object sender, EventArgs e)
+        {
+            this.Close();
+        }
+
+        private void btnAdd_Click(object sender, EventArgs e)
+        {
+            if (!loggedUser.access(Convert.ToInt16(btnAdd.Tag)))
+            {
+                return;
+            }
+            UserAdd add = new UserAdd(loggedUser);
+            add.ShowDialog();
+        }
+
+        private void rdbDeactivated_Click(object sender, EventArgs e)
+        {
+            if (rdbDeactivated.Checked)
+            {
+                rdbDeactivated.Checked = false;
+            }
+            else
+            {
+                rdbDeactivated.Checked = true;
+            }
+        }
+
+        private void btnDel_Click(object sender, EventArgs e)
+        {
+            cUsers user = new cUsers();
+            user.UserID = Convert.ToUInt16(dgvUsr["UserID", dgvUsr.CurrentCell.RowIndex].Value);
+
+            DialogResult decision = MessageBox.Show("Are you sure you want to delete" + user.UserName + "?", "Confirmation", MessageBoxButtons.YesNo);
+            if (decision == DialogResult.Yes)
+            {
+                if (user.deactivateUser())
+            {
+                MessageBox.Show("User has been deactivated");
                 //txtBxPassword.Clear();
                 //tBxFirstName.Clear();
                 ////tBxLastName.Clear();
@@ -172,40 +280,25 @@ namespace POS
 
                 LoadUsers();
             }
-
-            
-        }
-
-        private void btnEdit_Click(object sender, EventArgs e)
-        {
-            dgvUsr_Click(dgvUsr, e);
-
-            tBxFirstName.Enabled = true;
-            txtBxPassword.Enabled = true;
-            cmbType.Enabled = true;
-            tBxFirstName.Focus();
-
-            if (tBxFirstName.Text == "Del")
-            {
-                disableTools();
-                txtBxPassword.Enabled = true;
+                else{
+                    MessageBox.Show("User could not be deactivated.");
+                }
             }
-        }
-
-        private void dgvUsr_Click(object sender, EventArgs e)
-        {
-            disableTools();
-            tBxFirstName.Text = dgvUsr["Username", dgvUsr.CurrentCell.RowIndex].Value.ToString();
-            cmbType.SelectedValue = Convert.ToInt16(dgvUsr["PermLevel", dgvUsr.CurrentCell.RowIndex].Value);
-            dtpDtAdd.Value = Convert.ToDateTime(dgvUsr["DateAdded", dgvUsr.CurrentCell.RowIndex].Value);
-
+           
             
-       
+
         }
 
-        private void btnClose_Click(object sender, EventArgs e)
+        private void chkPassword_Click(object sender, EventArgs e)
         {
-            this.Close();
+            if (!chkPassword.Checked)
+            {
+                chkPassword.Checked = true;
+            }
+            else
+            {
+                chkPassword.Checked = false;
+            }
         }
     }
 }

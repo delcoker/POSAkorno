@@ -92,7 +92,7 @@ namespace POS
             DataSet ds = new DataSet();
             cUsers user = new cUsers();
 
-            ds = user.UsersGet();
+            ds = user.UsersGetActive();
 
             cmbUsers.DataSource = ds.Tables[0];
             cmbUsers.ValueMember = "UserID";

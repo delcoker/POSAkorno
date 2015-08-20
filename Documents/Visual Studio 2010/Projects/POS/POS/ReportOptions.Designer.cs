@@ -327,7 +327,7 @@
             this.chkEmployee.Name = "chkEmployee";
             this.chkEmployee.Size = new System.Drawing.Size(52, 20);
             this.chkEmployee.TabIndex = 17;
-            this.chkEmployee.Tag = "3";
+            this.chkEmployee.Tag = "4";
             this.chkEmployee.Text = "Use";
             this.chkEmployee.UseVisualStyleBackColor = true;
             this.chkEmployee.Click += new System.EventHandler(this.chkEmployee_Click);
@@ -488,6 +488,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnClose;
             this.ClientSize = new System.Drawing.Size(701, 563);
             this.Controls.Add(this.grpbxSearch);
             this.Controls.Add(this.btnClose);

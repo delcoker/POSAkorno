@@ -325,6 +325,23 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="coin.ico" />
+    <None Include="Resources\dishes1.png" />
+    <None Include="Resources\dishes21.png" />
+    <None Include="Resources\dishes2.png" />
+    <None Include="Resources\dishes.png" />
+    <None Include="Resources\timetosell.jpg" />
+    <None Include="Resources\sell2.jpg" />
+    <None Include="Resources\sell.jpg" />
+    <None Include="Resources\sale2.png" />
+    <None Include="Resources\sale.png" />
+    <None Include="Resources\report.png" />
+    <None Include="Resources\login2.png" />
+    <None Include="Resources\login.png" />
+    <None Include="Resources\inventory2.png" />
+    <None Include="Resources\inventory.png" />
+    <None Include="Resources\exit3.png" />
+    <None Include="Resources\exit2.png" />
+    <None Include="Resources\exit.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

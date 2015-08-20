@@ -15,7 +15,32 @@ namespace POS
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
+            // switch to this
             Application.Run(new Mainform(new cUsers()));
+
+            ////////////////////////////////////////////
+
+
+
+
+
+
+
+
+
+
+            //////// for debugging
+            cUsers del = new cUsers();
+            del.UserID = 1;
+            del.UserName = "Del";
+
+
+
+            //Application.Run(new MealView(del));
+
+            //Application.Run(new Sale(del));
+
+            //Application.Run(new ReportOptions(del));
         }
     }
 }

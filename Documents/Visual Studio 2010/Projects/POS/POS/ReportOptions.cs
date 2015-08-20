@@ -53,11 +53,6 @@ namespace POS
                 rpt.ReportOnCashier = cmbEmployees.Text;
             }
 
-
-
-
-
-
             rpt.TimedReport();
 
             ReportView rptVw = new ReportView(rpt, loggedUser);

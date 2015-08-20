@@ -301,8 +301,9 @@
             // btnLg
             // 
             this.btnLg.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnLg.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnLg.Font = new System.Drawing.Font("Calibri", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLg.ForeColor = System.Drawing.SystemColors.HotTrack;
+            this.btnLg.Image = global::POS.Properties.Resources.login2;
             this.btnLg.Location = new System.Drawing.Point(12, 419);
             this.btnLg.Name = "btnLg";
             this.btnLg.Size = new System.Drawing.Size(462, 192);
@@ -325,7 +326,9 @@
             // btnExt
             // 
             this.btnExt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnExt.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExt.DialogResult = System.Windows.Forms.DialogResult.Cancel;
+            this.btnExt.Font = new System.Drawing.Font("Calibri", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnExt.Image = global::POS.Properties.Resources.exit2;
             this.btnExt.Location = new System.Drawing.Point(480, 419);
             this.btnExt.Name = "btnExt";
             this.btnExt.Size = new System.Drawing.Size(462, 192);
@@ -337,33 +340,36 @@
             // btnMeals
             // 
             this.btnMeals.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.btnMeals.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMeals.Font = new System.Drawing.Font("Calibri", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnMeals.Image = global::POS.Properties.Resources.dishes1;
             this.btnMeals.Location = new System.Drawing.Point(12, 219);
             this.btnMeals.Name = "btnMeals";
             this.btnMeals.Size = new System.Drawing.Size(462, 192);
             this.btnMeals.TabIndex = 4;
             this.btnMeals.Tag = "5";
-            this.btnMeals.Text = "&Dishes";
+            this.btnMeals.Text = "&Items";
             this.btnMeals.UseVisualStyleBackColor = true;
             this.btnMeals.Click += new System.EventHandler(this.btnMeals_Click);
             // 
             // btnInv
             // 
             this.btnInv.Anchor = System.Windows.Forms.AnchorStyles.Right;
-            this.btnInv.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnInv.Font = new System.Drawing.Font("Calibri", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnInv.Image = global::POS.Properties.Resources.inventory;
             this.btnInv.Location = new System.Drawing.Point(480, 219);
             this.btnInv.Name = "btnInv";
             this.btnInv.Size = new System.Drawing.Size(462, 192);
             this.btnInv.TabIndex = 2;
             this.btnInv.Tag = "5";
-            this.btnInv.Text = "&Inventory";
+            this.btnInv.Text = "Stock";
             this.btnInv.UseVisualStyleBackColor = true;
             this.btnInv.Click += new System.EventHandler(this.btnInv_Click);
             // 
             // btnRprt
             // 
             this.btnRprt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.btnRprt.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRprt.Font = new System.Drawing.Font("Calibri", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnRprt.Image = global::POS.Properties.Resources.report;
             this.btnRprt.Location = new System.Drawing.Point(480, 20);
             this.btnRprt.Name = "btnRprt";
             this.btnRprt.Size = new System.Drawing.Size(462, 192);
@@ -375,7 +381,8 @@
             // 
             // btnSale
             // 
-            this.btnSale.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSale.Font = new System.Drawing.Font("Calibri", 36F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnSale.Image = global::POS.Properties.Resources.sale2;
             this.btnSale.Location = new System.Drawing.Point(12, 20);
             this.btnSale.Name = "btnSale";
             this.btnSale.Size = new System.Drawing.Size(462, 192);
@@ -432,11 +439,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 15F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnExt;
             this.ClientSize = new System.Drawing.Size(954, 665);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.gpbMain);
             this.Controls.Add(this.menuStrip1);
             this.Font = new System.Drawing.Font("Microsoft Sans Serif", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.HelpButton = true;
             this.MainMenuStrip = this.menuStrip1;
             this.MinimumSize = new System.Drawing.Size(970, 704);
             this.Name = "Mainform";

@@ -897,7 +897,7 @@
             this.btnPrnt.Name = "btnPrnt";
             this.btnPrnt.Size = new System.Drawing.Size(962, 54);
             this.btnPrnt.TabIndex = 6;
-            this.btnPrnt.Text = "Calculate / Print";
+            this.btnPrnt.Text = "Print / Calculate";
             this.btnPrnt.UseVisualStyleBackColor = true;
             this.btnPrnt.Click += new System.EventHandler(this.btnPrnt_Click);
             // 

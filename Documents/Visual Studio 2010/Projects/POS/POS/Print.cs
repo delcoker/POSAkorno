@@ -294,13 +294,13 @@ namespace POS
 
                 if(hasStock)
                 {
-                    cInventoryDebit inv = new cInventoryDebit(0, Convert.ToUInt32(mealID), Convert.ToUInt32(qty), dtpDtAdd.Value.ToString());
+                    cInventoryDebit inv = new cInventoryDebit(0, Convert.ToUInt32(mealID), Convert.ToUInt32(qty), dtpDtAdd.Value.ToString(), loggedUser.UserID);
                    
                     try
                     {
                         if (!inv.saveRecord())
                         {
-                            MessageBox.Show("Could not save to inventory" + error);
+                            MessageBox.Show("Could not save to inventory\n" + error);
                         }
 
                     }

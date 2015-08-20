@@ -18,6 +18,8 @@ namespace POS
 		private uint mQuanTypeID;
         private string mDateAdded;
         private bool mHasStock;
+        private bool mDeleted;
+        private string mDateDeleted;
 
         private SqlCommand cmd;
         private SqlParameter param;
@@ -30,6 +32,7 @@ namespace POS
             //constr = "Data Source=AKOSUAPC;Initial Catalog=Ako;Integrated Security=True";
 
         }
+
         public cMeals(uint MealID, string Name, decimal Price, uint CatID, uint QuantID, string DateAdded)
         {
             mMealID = MealID;
@@ -38,6 +41,20 @@ namespace POS
             mCategoryID = CatID;
             mQuanTypeID = QuantID;
             mDateAdded = DateAdded;
+            //      constr = ConfigurationManager.AppSettings["Connectionstring"];
+            //      constr = "Data Source=AKOSUAPC;Initial Catalog=Test;Integrated Security=True";
+        }
+
+        public cMeals(uint MealID, string Name, decimal Price, uint CatID, uint QuantID, string DateAdded, bool HasStock, bool Deleted)
+        {
+            mMealID = MealID;
+            mName = Name;
+            mPrice = Price;
+            mCategoryID = CatID;
+            mQuanTypeID = QuantID;
+            mDateAdded = DateAdded;
+            mHasStock = HasStock;
+            mDeleted = Deleted;
             //      constr = ConfigurationManager.AppSettings["Connectionstring"];
             //      constr = "Data Source=AKOSUAPC;Initial Catalog=Test;Integrated Security=True";
         }
@@ -54,6 +71,20 @@ namespace POS
             //      constr = ConfigurationManager.AppSettings["Connectionstring"];
             //      constr = "Data Source=AKOSUAPC;Initial Catalog=Test;Integrated Security=True";
         }
+
+        public bool Deleted
+        {
+            get { return mDeleted; }
+            set { mDeleted = value; }
+        }
+
+        public string DateDeleted
+        {
+            get { return mDateDeleted; }
+            set { mDateDeleted = value; }
+        }
+
+
 
         public uint MealID
         {
@@ -168,6 +199,7 @@ namespace POS
             query("@QuanTypeID", QuanTypeID);
             query("@DateAdded", DateAdded);
             query("@HasStock", HasStock);
+            query("@Deleted", Deleted);
 
             try
             {
@@ -192,8 +224,8 @@ namespace POS
             openConnection();
             cmd.CommandText = "prc_MealDelete";
 
-            query("@MealName", Name);
-            query("@QuanTypeID", QuanTypeID);
+            query("@MealID", MealID);
+            //query("@QuanTypeID", QuanTypeID);
 
             try
             {
@@ -220,6 +252,37 @@ namespace POS
 
             query("@Name", Name);
             query("@QuanTypeID", QuanTypeID);
+
+            SqlDataReader dr = cmd.ExecuteReader();
+            try
+            {
+                while (dr.Read())
+                {
+                    if (dr.GetSqlValue(0).ToString() == "1")
+                        return true;
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+                throw ex;
+            }
+            finally
+            {
+                con.Dispose();
+                con.Close();
+            }
+            return false;
+        }
+
+        public bool hasStock()
+        {
+            openConnection();
+            cmd.CommandText = "prc_hasStock";
+
+            query("@MealID", MealID);
+            //query("@QuanTypeID", QuanTypeID);
 
             SqlDataReader dr = cmd.ExecuteReader();
             try

@@ -643,7 +643,10 @@ namespace POS
                 NumPortions a = new NumPortions();
                 a.ShowDialog();
                 String qty = a.por().ToString();
-                if (a.por() > 0)
+
+                
+
+                if (a.por() > 0 && stockCheck(selectedItems, lstVwItms, Convert.ToInt32(qty), true))
                 {
                     ListViewItem lvi = new ListViewItem(selectedItems[0].SubItems[0].Text);
                     lvi.SubItems.Add(selectedItems[0].SubItems[1].Text);    // Price
@@ -662,6 +665,9 @@ namespace POS
 
                     // is it part of stock table
                     lvi.SubItems.Add(selectedItems[0].SubItems[6].Text);
+
+
+                    
 
                     lstVwItms.Items.Add(lvi);
                     lstVwItms.Items.Remove(selectedItems[0]);
@@ -931,7 +937,7 @@ namespace POS
             return status;
         }
 
-
+        // checks stock of individual listviews and if it's possible to purhase more based on what is in the selected listview
         // considers use of numpad ... multiple 
         private bool stockCheck(ListView.SelectedListViewItemCollection selectedItems, ListView lst, int qtyToBuy)
         {
@@ -1019,6 +1025,100 @@ namespace POS
                 if (qtyLeft - qtyToBuy < 0)
                 {
                     MessageBox.Show("You can not purchase more of this product.\nTop up inventory\n"+ qtyLeft + " left.");
+                    status = false;
+                }
+            }
+            return status;
+        }
+
+
+        // selected listview stockcheck
+        private bool stockCheck(ListView.SelectedListViewItemCollection selectedItems, ListView lst, int qtyToBuy, bool selectedListView)
+        {
+            bool status = true;
+            ///////////////////////////////////
+            /////inventory////stock////////////
+
+            int mealID = Convert.ToInt32(selectedItems[0].Name);
+
+            bool hasStock = Convert.ToBoolean(selectedItems[0].SubItems[6].Text);
+
+            int qtyLeft = 0;
+
+            DataSet ds = new DataSet();
+            cInventory inv = new cInventory();
+
+            inv.MealID = Convert.ToUInt32(mealID);
+
+            ///////////////////////////////// find item in listview and get amount//////////////////////////////////////////////////////
+            //int qtyInSelectedList = 0;
+            //// Acquire SelectedItems 
+            ////var sel = selectedItems.
+            //var selectedItem = lst.SelectedItems;
+            //if (selectedItem.Count > 0 && (lstVwItms.Items.ContainsKey(selectedItem[0].Name)))
+            //{
+            //    int selectedIntoListViewIndex = lstVwItms.Items.IndexOfKey(selectedItem[0].Name);
+
+            //    //int a = Convert.ToInt16(lst.Items[selectedIntoListViewIndex].SubItems[0].Text.Trim());
+
+            //    qtyInSelectedList = (Convert.ToInt16(lstVwItms.Items[selectedIntoListViewIndex].SubItems[2].Text));
+            //    //// multiplier
+            //    //if (multiplier.Contains("x") && Convert.ToInt16(multiplier.Substring(0, multiplier.IndexOf("x"))) > 0)
+            //    //{
+            //    //    qty = Convert.ToInt16(multiplier.Substring(0, multiplier.IndexOf("x")));
+            //    //}
+
+            //    //lstVwItms.Items[selectedIntoListViewIndex].SubItems[2].Text = qty.ToString();
+
+
+            //    //lstVwItms.HideSelection = false;
+            //    lstVwItms.Select();
+            //    lstVwItms.Items[selectedIntoListViewIndex].Selected = true;
+
+            //}
+
+            //lstVwItms.
+
+            //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+            // if it's part of the inverntory table
+            if (hasStock)
+            {
+
+                //try
+                //{
+                ds = inv.InventoryMealsGet();
+                qtyLeft = Convert.ToInt32(ds.Tables[0].Rows[0]["SLeft"].ToString());
+                //}
+                //catch (Exception ex)
+                //{
+
+                //}
+
+
+                if (!(qtyLeft > 0))
+                {
+                    MessageBox.Show("This item has no stock in the inventory. Pelase top up");
+                    status = false;
+                }
+                //else if (qtyLeft == 2)
+                //{
+                //    MessageBox.Show("You have two more of this item left");
+                //    status = true;
+                //}
+                //else if (qtyLeft == 1)
+                //{
+                //    MessageBox.Show("You have one more of this item left. Top up soon");
+                //    //don't allow more
+                //    status = true;
+                //}
+                else
+                {
+                    status = true;
+                }
+                if (qtyLeft - qtyToBuy < 0)
+                {
+                    MessageBox.Show("You can not purchase more of this product.\nTop up inventory\n" + qtyLeft + " left.");
                     status = false;
                 }
             }

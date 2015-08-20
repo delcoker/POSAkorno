@@ -310,6 +310,63 @@ namespace POS
             }
         }
 
+        public DataSet UsersGetActive()
+        {
+            openConnection();
+            cmd.CommandText = "prc_UsersGetActive";
+
+            query("UserID", UserID);
+            //    query("DateAdded", DateAdded);
+
+            DataSet ds = new DataSet();
+            try
+            {
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+
+                da.Fill(ds, "Users");
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                ds.Dispose();
+                con.Dispose();
+                con.Close();
+            }
+        }
+
+        public DataSet UsersGetAll()
+        {
+            openConnection();
+            cmd.CommandText = "prc_UsersGetAll";
+
+            query("UserID", UserID);
+            //    query("DateAdded", DateAdded);
+
+            DataSet ds = new DataSet();
+            try
+            {
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+
+                da.Fill(ds, "Users");
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                throw ex;
+            }
+            finally
+            {
+                ds.Dispose();
+                con.Dispose();
+                con.Close();
+            }
+        }
+
+
         public bool access( int ItemPermLevel)
         {
             if (PermLevel <= ItemPermLevel)
@@ -403,7 +460,91 @@ namespace POS
             query("@DateAdded", DateAdded);
             query("@LastLogin", LastLogin);
             query("@LastAttemptedLogin", LastAttemptedLogin);
-            
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+                throw ex;
+            }
+            finally
+            {
+                con.Dispose();
+                con.Close();
+            }
+        }
+
+        public bool saveRecordNoPassword()
+        {
+            openConnection();
+            cmd.CommandText = "prc_UserSaveNoPassword";
+
+            query("@UserID", UserID);
+            query("@UserName", UserName.Trim());
+            query("@Company", Company);
+            query("@PermLevel", PermLevel);
+            query("@Deactivate", DeActivate);
+            query("@Password", Password);
+            query("@DateAdded", DateAdded);
+            query("@LastLogin", LastLogin);
+            query("@LastAttemptedLogin", LastAttemptedLogin);
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+                throw ex;
+            }
+            finally
+            {
+                con.Dispose();
+                con.Close();
+            }
+        }
+
+
+        public bool deactivateUser()
+        {
+            openConnection();
+            cmd.CommandText = "prc_UserDelete";
+
+            query("@UserID", UserID);
+
+            try
+            {
+                cmd.ExecuteNonQuery();
+                return true;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                return false;
+                throw ex;
+            }
+            finally
+            {
+                con.Dispose();
+                con.Close();
+            }
+        }
+
+        public bool reactivateUser()
+        {
+            openConnection();
+            cmd.CommandText = "prc_UserReAdd";
+
+            query("@UserID", UserID);
+
             try
             {
                 cmd.ExecuteNonQuery();

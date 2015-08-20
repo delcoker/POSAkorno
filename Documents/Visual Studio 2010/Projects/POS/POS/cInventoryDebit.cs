@@ -15,6 +15,7 @@ namespace POS
         private uint mMealID;
         private uint mDebitQuantity;
         private string mDateDebited;
+        private int mUserID;
 
         private SqlCommand cmd;
         private SqlParameter param;
@@ -46,12 +47,19 @@ namespace POS
             set { mDateDebited = value; }
         }
 
-        public cInventoryDebit(uint InventoryDebitID, uint MealID, uint DebitQuantity, string DateDebited)
+        public int UserID
+        {
+            get { return mUserID; }
+            set { mUserID = value; }
+        }
+
+        public cInventoryDebit(uint InventoryDebitID, uint MealID, uint DebitQuantity, string DateDebited, int UserID)
         {
             mInventoryDebitID = InventoryDebitID;
             mMealID = MealID;
             mDebitQuantity = DebitQuantity;
             mDateDebited = DateDebited;
+            mUserID = UserID;
             //      constr = ConfigurationManager.AppSettings["Connectionstring"];
             //      constr = "Data Source=AKOSUAPC;Initial Catalog=Test;Integrated Security=True";
         }
@@ -106,6 +114,7 @@ namespace POS
             query("@MealID", MealID);
             query("@DebitQuantity", DebitQuantity);
             query("@DateDebited", DateDebited);
+            query("@UserID", UserID);
 
             try
             {

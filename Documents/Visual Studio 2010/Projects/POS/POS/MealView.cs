@@ -35,6 +35,8 @@ namespace POS
             loggedUser = user;
 
             llblLog.Text = loggedUser.UserName;
+
+            updateFont();
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -56,11 +58,24 @@ namespace POS
                 return;
             }
 
-            dgvCat_Click(dgvCat, e);
+            if(txtName.Text == "" || txtName.Text == null)
+            {
+                MessageBox.Show("Please select what you would like to edit first");
+                return;
+            }
+
+           // dgvCat_Click(dgvCat, e);
             pEdt.Enabled = true;
+
+            highMealName();
         }
 
-       
+        private void highMealName()
+        {
+            txtName.Focus();
+            txtName.Select(0, txtName.Text.Length);
+        }
+
 
         private void btnAdd_Click(object sender, EventArgs e)
         {
@@ -104,6 +119,7 @@ namespace POS
                 dgvCat.Columns[6].Width = 150;
                 dgvCat.Columns[7].Width = 120;
                 dgvCat.Columns[8].Width = 100;
+                dgvCat.Columns[10].Visible = false;
 
 
             }
@@ -121,7 +137,7 @@ namespace POS
             numPrice.Minimum = 0;
 
 
-            dgvCat.Sort(dgvCat.Columns["Name"], ListSortDirection.Ascending);
+            //dgvCat.Sort(dgvCat.Columns["Name"], ListSortDirection.Ascending);
             // enabld(false);
         }
 
@@ -149,37 +165,20 @@ namespace POS
                 return;
             }
 
-            if (txtName.Text.Trim() == "")
-            {
-                MessageBox.Show("Name of the meal required");
-                return;
-            }
-            if (cmbCtgy.SelectedIndex < 0)
-            {
-                MessageBox.Show("Select a category");
-                return;
-            }
-            if (cmbQtyType.SelectedIndex < 0)
-            {
-                MessageBox.Show("Select a quantity type");
-                return;
-            }
-            if (numPrice.Value == 0)
-            {
-                MessageBox.Show("Input a price amount");
-                return;
-            }
+            
+            
 
             cMeals meal = new cMeals();
-            meal.Name = txtName.Text;
-            meal.QuanTypeID = Convert.ToUInt32(cmbQtyType.SelectedValue);
+            meal.MealID = Convert.ToUInt32(dgvCat["MealID", dgvCat.CurrentCell.RowIndex].Value);
+            //meal.Name = txtName.Text;
+            //meal.QuanTypeID = Convert.ToUInt32(cmbQtyType.SelectedValue);
 
             //MessageBox.Show(meal.Name);
             //MessageBox.Show(meal.QuanTypeID.ToString());
 
             if (meal.mealDelete())
             {
-                MessageBox.Show("Deleted");
+                MessageBox.Show("Deleted.\nWill not display in Sale Items.");
                 clear();
             }
             else
@@ -224,6 +223,11 @@ namespace POS
             {
                 return;
             }
+            if (!pEdt.Enabled)
+            {
+                MessageBox.Show("Select an item and edit before saving");
+                return;
+            }
             if (txtName.Text.Trim() == "")
             {
                 MessageBox.Show("Name of the meal required");
@@ -248,12 +252,15 @@ namespace POS
             cMeals meal = new cMeals();
 
             meal.MealID = Convert.ToUInt32(dgvCat["MealID", dgvCat.CurrentCell.RowIndex].Value);
+            meal.Deleted = rdbDeleted.Checked;
             meal.Name = txtName.Text;
             meal.Price = Convert.ToDecimal(numPrice.Value);
             meal.CategoryID = Convert.ToUInt32(cmbCtgy.SelectedValue);
             meal.QuanTypeID = Convert.ToUInt32(cmbQtyType.SelectedValue);
             meal.DateAdded = dtpDtAdd.Value.ToString();
             meal.HasStock = rdbHaveStock.Checked;
+            
+            
 
             //if (meal.checkMeal())
             //{
@@ -288,11 +295,57 @@ namespace POS
             cmbQtyType.SelectedValue = Convert.ToInt16(dgvCat["QuanTypeID", dgvCat.CurrentCell.RowIndex].Value);
             dtpDtAdd.Value = Convert.ToDateTime(dgvCat["DateAdded", dgvCat.CurrentCell.RowIndex].Value);
             rdbHaveStock.Checked = Convert.ToBoolean(dgvCat["HasStock", dgvCat.CurrentCell.RowIndex].Value);
+            rdbDeleted.Checked = Convert.ToBoolean(dgvCat["Deleted", dgvCat.CurrentCell.RowIndex].Value);
         }
 
         private void pMealEdit_Paint(object sender, PaintEventArgs e)
         {
 
+        }
+
+        private void rdbHaveStock_Click(object sender, EventArgs e)
+        {
+            if (!rdbHaveStock.Checked)
+            {
+                rdbHaveStock.Checked = true;
+            }
+            else
+            {
+                rdbHaveStock.Checked = false;
+            }
+        }
+
+        private void rdbDeleted_Click(object sender, EventArgs e)
+        {
+            if (!rdbDeleted.Checked)
+            {
+                rdbDeleted.Checked = true;
+            }
+            else
+            {
+                rdbDeleted.Checked = false;
+            }
+        }
+
+        private void updateFont()
+        {
+            foreach (DataGridViewColumn c in dgvCat.Columns)
+            {
+                c.DefaultCellStyle.Font = new Font("Arial", 16F, GraphicsUnit.Pixel);
+            }
+        }
+
+        private void btnStock_Click(object sender, EventArgs e)
+        {
+            if (!loggedUser.access(Convert.ToInt16(btnAdd.Tag)))
+            {
+                return;
+            }
+            this.Close();
+            this.Dispose();
+            InventoryView inv = new InventoryView(loggedUser);
+            inv.ShowDialog();
+            
         }
 
 

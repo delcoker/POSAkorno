@@ -96,6 +96,7 @@
             // 
             // btnExt
             // 
+            this.btnExt.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnExt.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnExt.Location = new System.Drawing.Point(3, 52);
             this.btnExt.Name = "btnExt";
@@ -161,6 +162,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnExt;
             this.ClientSize = new System.Drawing.Size(481, 218);
             this.Controls.Add(this.pQtyTAdd);
             this.Controls.Add(this.llblLog);

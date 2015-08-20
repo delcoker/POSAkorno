@@ -87,6 +87,7 @@
             // 
             // btnCancel
             // 
+            this.btnCancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnCancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnCancel.Location = new System.Drawing.Point(248, 182);
             this.btnCancel.Name = "btnCancel";
@@ -152,8 +153,10 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.CancelButton = this.btnCancel;
             this.ClientSize = new System.Drawing.Size(410, 350);
             this.Controls.Add(this.panel1);
+            this.HelpButton = true;
             this.MinimumSize = new System.Drawing.Size(426, 389);
             this.Name = "UserLogin";
             this.Text = "User Login";

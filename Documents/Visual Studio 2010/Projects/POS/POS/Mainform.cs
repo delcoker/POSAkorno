@@ -29,7 +29,7 @@ namespace POS
 
             //this.WindowState = FormWindowState.Maximized;
 
-            
+            tooltips();
 
             try
             {
@@ -59,7 +59,29 @@ namespace POS
             
             CenterToScreen();
             
+           
+
             this.Refresh();
+        }
+
+        private void tooltips()
+        {
+            ToolTip toolTip1 = new ToolTip();
+
+            // Set up the delays for the ToolTip.
+            //toolTip1.AutoPopDelay = 1000;
+            //toolTip1.InitialDelay = 1000;
+            toolTip1.ReshowDelay = 500;
+            // Force the ToolTip text to be displayed whether or not the form is active.
+            toolTip1.ShowAlways = true;
+
+            // Set up the ToolTip text for the Button and Checkbox.
+            toolTip1.SetToolTip(this.btnSale, "Sell on of our delicious dishes");
+            toolTip1.SetToolTip(this.btnRprt, "Get a report on activities regarding this POS");
+            toolTip1.SetToolTip(this.btnMeals, "Add / Edit / View dishes");
+            toolTip1.SetToolTip(this.btnInv, "Credit or Debit items in stock");
+            toolTip1.SetToolTip(this.btnLg, "Login or Logout");
+            toolTip1.SetToolTip(this.btnExt, "Exit");
         }
 
         private void addToolStripMenuItem_Click(object sender, EventArgs e)
