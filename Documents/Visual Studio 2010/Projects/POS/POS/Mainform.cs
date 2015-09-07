@@ -21,7 +21,42 @@ namespace POS
 
             InitializeComponent();
 
-            toolStripStatusLabelCompany.Text = cmm.Company;
+            //------------------------- check company info
+            int size = 0;
+            int count = 0;
+            cCompanyDetails com;
+            DataSet ds;
+
+            //do
+            //{
+                com = new cCompanyDetails();
+
+                ds = com.InfoGet();
+
+                size = ds.Tables[0].Select("CompanyName is not null").Length;
+
+                if (!(size > 0))
+                {
+
+                    CompanyDetails comp = new CompanyDetails();
+                    comp.ShowDialog();
+                }
+                count++;
+
+            //} while (!(size > 0) && count < 3);
+
+            //if (!(count < 3))
+            //{
+            //    Application.Exit();
+            //    //EndApp();
+            //}
+                if ((size > 0))
+                {
+                    com.CompanyName = ds.Tables[0].Rows[0][1].ToString();
+                }
+            //-------------------------
+
+            toolStripStatusLabelCompany.Text = com.CompanyName;
      //       toolStripStatusLabelUser.Text = new UserLogin(;
             toolStripStatusLabelDate.Text = /*DateTime.Today.DayOfWeek.ToString() + ", " + */ DateTime.Today.ToLongDateString()  + "  " + DateTime.Now.ToShortTimeString();
 
@@ -47,7 +82,7 @@ namespace POS
                 MessageBox.Show("Error reading Solution/ClientInfo data from config file." + Environment.NewLine + ex.Message);
             }
 
-            Cursor.Current = Cursors.Default;
+            
 
             bool status = loginSuccess();
             if (!status)
@@ -62,6 +97,8 @@ namespace POS
            
 
             this.Refresh();
+
+            Cursor.Current = Cursors.Default;
         }
 
         private void tooltips()
@@ -100,7 +137,12 @@ namespace POS
 
         private void btnExt_Click(object sender, EventArgs e)
         {
+            Cursor.Current = Cursors.WaitCursor;
+
             this.Close();
+
+            Cursor.Current = Cursors.Default;
+
         }
 
         private void addToolStripMenuItem1_Click(object sender, EventArgs e)
@@ -200,6 +242,7 @@ namespace POS
 
         private void btnSale_Click(object sender, EventArgs e)
         {
+            Cursor.Current = Cursors.WaitCursor;
             if (!loggedIn())
             {
 
@@ -213,6 +256,8 @@ namespace POS
            
             
             sell.ShowDialog();
+
+            Cursor.Current = Cursors.Default;
         }
 
         private bool loggedIn()
@@ -341,6 +386,8 @@ namespace POS
         // view meals
         private void btnMeals_Click(object sender, EventArgs e)
         {
+            Cursor.Current = Cursors.WaitCursor;
+
             //int perm = 99;
             
             if (!loggedIn())
@@ -350,10 +397,14 @@ namespace POS
             MealView viewMeal = new MealView(loggedUser);
             //loggedUser.PermLevel;
             viewMeal.ShowDialog();
+
+            Cursor.Current = Cursors.Default;
+
         }
 
         private void btnRprt_Click(object sender, EventArgs e)
         {
+            Cursor.Current = Cursors.WaitCursor;
             if (!loggedIn())
             {
                 return;
@@ -366,10 +417,13 @@ namespace POS
             ReportOptions rep = new ReportOptions(loggedUser);
             
             rep.ShowDialog();
+            Cursor.Current = Cursors.Default;
         }
 
         private void btnInv_Click(object sender, EventArgs e)
         {
+            Cursor.Current = Cursors.WaitCursor;
+
             if (!loggedIn())
             {
                 return;
@@ -382,10 +436,15 @@ namespace POS
             InventoryView inv = new InventoryView(loggedUser);
             
             inv.ShowDialog();
+
+            Cursor.Current = Cursors.Default;
+
         }
 
         private void addToolStripMenuItem4_Click(object sender, EventArgs e)
         {
+            Cursor.Current = Cursors.WaitCursor;
+
             if (!loggedIn())
             {
                 return;
@@ -397,10 +456,14 @@ namespace POS
             InventoryAdd inv = new InventoryAdd(loggedUser);
             
             inv.ShowDialog();
+            Cursor.Current = Cursors.Default;
+
         }
 
         private void btnLg_Click(object sender, EventArgs e)
         {
+            Cursor.Current = Cursors.WaitCursor;
+
             bool status = loginSuccess();
             if (!status)
             {
@@ -408,6 +471,9 @@ namespace POS
                 return;
             }
             loadUserDetails(status);
+
+            Cursor.Current = Cursors.Default;
+
         }
 
         private void addToolStripMenuItem5_Click(object sender, EventArgs e)

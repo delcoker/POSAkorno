@@ -21,6 +21,9 @@ namespace POS
 
 
         private string multiplier = "0";
+        private HashSet<string> headers;
+
+        private string headerStarter = "h";
 
         //object senderDoubleClcik;
         //EventArgs eDoubleClick = new EventArgs();
@@ -30,50 +33,127 @@ namespace POS
             loggedUser = user;
 
 
-
-
             InitializeComponent();
             CenterToParent();
             LoadDifCtgy();
 
-            //numTot.Tex;
-
             llblLog.Text = loggedUser.UserName;
 
-            int a = SystemInformation.VerticalScrollBarWidth;
+            //int a = SystemInformation.VerticalScrollBarWidth;
 
-            //lstVwBrkfst.
-
-            //tabCont.Sc
-
-            //lstVwBrkfst.
-
-            // make scrollbar width bigger
-            //lstVwBrkfst.get
-            //for (int i = 0; i < lstVwBrkfst.Controls.Count; i++)
-            //{
-            //   Control c = tabCont.Controls[i];
-            //}
-
-            //cScrollBar sc = new cScrollBar();
-            //ListView ss = sc;
-            //sc.OnScroll();
-
-
-
-            // Handle the TextChanged to get the text for our search.
-           // txtSearch.TextChanged += new EventHandler(txtSearch_TextChanged);
+            LoadCategoriesForTabPages();
 
             txtSearch.GotFocus += new EventHandler(RemoveText);
             txtSearch.LostFocus += new EventHandler(AddText);
         }
 
+        // load items into listviews
+        public void loadUpListViews()
+        {
+            int i = 0;
+            foreach (TabPage tp in tabCont.TabPages)
+            {
+                if (tp.Text.Equals(headers.ElementAt(i)))
+                {
+                    //LoadDifferentMealsIntoListView(
+                    if (!(LoadDifferentMealsIntoListView(headers.ElementAt(i).Substring(headerStarter.Length), (ListView)tp.Controls[0]) > 0))
+                    {
+                        LoadDifferentMealsIntoListView((ListView)tp.Controls[0], headers.ElementAt(i).Substring(headerStarter.Length));
+                    }
+                    i++;
+                }
 
+            }
+        }
+
+        private void LoadCategoriesForTabPages()
+        {
+
+            DataSet ds = new DataSet();
+            DataSet ds2 = new DataSet();
+
+            try
+            {
+                cCategory cat = new cCategory();
+                ds = cat.CategoryGet();
+
+                cQuanTypes qt = new cQuanTypes();
+                ds2 = qt.QuanTypeGet();
+
+                headers = new HashSet<string>();
+
+                foreach (DataRow row in ds.Tables[0].Rows)
+                {
+                    if (!(row["Category"].ToString().Equals("n/a")))
+                    {
+                        string head = headerStarter + row["Category"].ToString();
+
+                        tabCont.TabPages.Add(head);
+                        headers.Add(head);
+                    }
+                }
+
+                foreach (DataRow row in ds2.Tables[0].Rows)
+                {
+                    if (!(row["QuanType"].ToString().Equals("n/a")))
+                    {
+                        string head = headerStarter + row["QuanType"].ToString();
+                        if (!headers.Contains(head))
+                        {
+                            tabCont.TabPages.Add(head);
+
+                            headers.Add(head);
+                        }
+                    }
+                }
+
+                int i = 0;
+                foreach (TabPage tp in tabCont.TabPages)
+                {
+                    if (tp.Text.Equals(headers.ElementAt(i)))
+                    {
+                        ListView l = new ListView();
+                        l.Dock = DockStyle.Fill;
+                        l.Activation = ItemActivation.OneClick;
+                        l.MultiSelect = false;
+                        l.Sorting = SortOrder.Ascending;
+                        l.View = View.List;
+                        l.LargeImageList = imgLst;
+                        l.SmallImageList = imgLst;
+                        l.Click += new EventHandler(listViewsDel_Click);
+
+
+
+                        Dictionary<String, ListView> a = new Dictionary<String, ListView>();
+                        String key = headerStarter + headers.ElementAt(i);
+                        a.Add(key, l);
+
+                        ListView v = new ListView();
+                        //v.Dock = DockStyle.Fill;
+
+                        bool y = a.TryGetValue(key, out v);
+
+                        tp.Controls.Add(v);
+
+                        i++;
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                ds.Dispose();
+            }
+            loadUpListViews();
+        }
 
 
         private void LoadAll()
         {
-            LoadDifferentMealsIntoListView("", lstVwAll, 99);
+            LoadDifferentMealsIntoListView("", lstVwAll);
 
             //for (int i = 0; i < this.lstVwAll.Controls.Count; i++)
             //{
@@ -107,125 +187,126 @@ namespace POS
 
         private void LoadSnacks()
         {
-            LoadDifferentMealsIntoListView("Snack", lstVwSnck, 99);
+            LoadDifferentMealsIntoListView(lstVwSnck, "Snack");
         }
 
         //   uses category type
         private void LoadSingles()
         {
-            LoadDifferentMealsIntoListView("Singles", lstVwSngl, 99);
+            LoadDifferentMealsIntoListView("Singles", lstVwSngl);
         }
 
         private void LoadDeluxe()
         {
-            LoadDifferentMealsIntoListView(1, lstVwDeluxe);
+            LoadDifferentMealsIntoListView(lstVwDeluxe, "Deluxe");
         }
 
         private void LoadClassic()
         {
-            LoadDifferentMealsIntoListView(2, lstVwClassic);
+            LoadDifferentMealsIntoListView(lstVwClassic, "Classic");
         }
 
         private void LoadAmericana()
         {
-            LoadDifferentMealsIntoListView(3, lstVwAmericana);
+            LoadDifferentMealsIntoListView(lstVwAmericana, "Americana");
         }
 
-        private void LoadDifferentMealsIntoListView(uint QuantityTypeID, ListView LstVw)
+        //private void LoadDifferentMealsIntoListView(uint QuantityTypeID, ListView LstVw)
+        //{
+        //    DataSet ds = new DataSet();
+        //    cMeals meals = new cMeals();
+
+        //    try
+        //    {
+        //        meals.QuanTypeID = QuantityTypeID;
+        //        ds = meals.specificMealGetByQuantity(QuantityTypeID);
+
+        //        LstVw.Columns.Add("Name", 250, HorizontalAlignment.Left);
+        //        LstVw.Columns.Add("Price", 100, HorizontalAlignment.Left);
+        //        LstVw.Columns.Add("Quantity Type", 150, HorizontalAlignment.Left);
+
+        //        // Get the table from the data set
+        //        DataTable dtable = ds.Tables[0];
+        //        // or DataTable dtable = ds.Tables["Meals"];
+
+        //        // Clear the ListView control
+        //        LstVw.Items.Clear();
+
+        //        // Location of Large Icon images
+        //        //lstVwBrkfst.LargeImageList = imgLst;
+
+        //        // Display items in the ListView control
+        //        for (int i = 0; i < dtable.Rows.Count; i++)
+        //        {
+        //            DataRow drow = dtable.Rows[i];
+
+        //            // Only row that have not been deleted
+        //            if (drow.RowState != DataRowState.Deleted)
+        //            {
+        //                // Define the list items
+        //                ListViewItem lvi = new ListViewItem(drow["Name"].ToString().ToUpper());
+        //                lvi.SubItems.Add(drow["Price"].ToString());
+        //                lvi.SubItems.Add(drow["QuanType"].ToString());
+
+        //                // Hold the id ---------------
+        //                lvi.SubItems.Add(drow["MealID"].ToString());
+        //                lvi.Name = drow["MealID"].ToString();
+
+        //                // del add the hasstock here
+        //                lvi.SubItems.Add(drow["HasStock"].ToString());
+
+
+        //                lvi.ToolTipText = "Select this to choose " + drow["Name"].ToString();
+
+        //                //imgLst = new ImageList();
+        //                //Image j = new Image();
+        //                //Bitmap image = new Bitmap(drow["Name"].ToString().Trim());
+        //                //imgLst.Images.Add(Resources.ReferenceEquals());
+        //                //-----------------------------------------------------
+
+
+
+        //                // Text representing image
+        //                lvi.ImageKey = drow["Name"].ToString().Trim() + ".jpg";
+
+
+        //                //if the ImageList does not contain the key set it to the default
+        //                if (!imgLst.Images.ContainsKey(lvi.ImageKey))
+        //                {
+        //                    lvi.ImageIndex = 0;
+
+        //                }
+
+
+
+        //                // Add the list items to the ListView
+        //                LstVw.Items.Add(lvi);
+
+        //                //       this.Controls.Add(lstVwBrkfst);
+        //            }
+        //        }
+        //    }
+        //    catch (Exception ex)
+        //    {
+        //        MessageBox.Show(ex.Message);
+        //    }
+        //    finally
+        //    {
+        //        ds.Dispose();
+        //    }
+
+        //}
+
+        private int LoadDifferentMealsIntoListView(string Category, ListView LstVw)
         {
             DataSet ds = new DataSet();
             cMeals meals = new cMeals();
-
+            int dsSize = 0;
             try
             {
-                meals.QuanTypeID = QuantityTypeID;
-                ds = meals.specificMealGetByQuantity(QuantityTypeID);
-
-                LstVw.Columns.Add("Name", 250, HorizontalAlignment.Left);
-                LstVw.Columns.Add("Price", 100, HorizontalAlignment.Left);
-                LstVw.Columns.Add("Quantity Type", 150, HorizontalAlignment.Left);
-
-                // Get the table from the data set
-                DataTable dtable = ds.Tables[0];
-                // or DataTable dtable = ds.Tables["Meals"];
-
-                // Clear the ListView control
-                LstVw.Items.Clear();
-
-                // Location of Large Icon images
-                //lstVwBrkfst.LargeImageList = imgLst;
-
-                // Display items in the ListView control
-                for (int i = 0; i < dtable.Rows.Count; i++)
-                {
-                    DataRow drow = dtable.Rows[i];
-
-                    // Only row that have not been deleted
-                    if (drow.RowState != DataRowState.Deleted)
-                    {
-                        // Define the list items
-                        ListViewItem lvi = new ListViewItem(drow["Name"].ToString().ToUpper());
-                        lvi.SubItems.Add(drow["Price"].ToString());
-                        lvi.SubItems.Add(drow["QuanType"].ToString());
-
-                        // Hold the id ---------------
-                        lvi.SubItems.Add(drow["MealID"].ToString());
-                        lvi.Name = drow["MealID"].ToString();
-
-                        // del add the hasstock here
-                        lvi.SubItems.Add(drow["HasStock"].ToString());
-
-
-                        lvi.ToolTipText = "Select this to choose " + drow["Name"].ToString();
-
-                        //imgLst = new ImageList();
-                        //Image j = new Image();
-                        //Bitmap image = new Bitmap(drow["Name"].ToString().Trim());
-                        //imgLst.Images.Add(Resources.ReferenceEquals());
-                        //-----------------------------------------------------
-
-
-
-                        // Text representing image
-                        lvi.ImageKey = drow["Name"].ToString().Trim() + ".jpg";
-
-
-                        //if the ImageList does not contain the key set it to the default
-                        if (!imgLst.Images.ContainsKey(lvi.ImageKey))
-                        {
-                            lvi.ImageIndex = 0;
-
-                        }
-
-
-
-                        // Add the list items to the ListView
-                        LstVw.Items.Add(lvi);
-
-                        //       this.Controls.Add(lstVwBrkfst);
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show(ex.Message);
-            }
-            finally
-            {
-                ds.Dispose();
-            }
-
-        }
-
-        private void LoadDifferentMealsIntoListView(string Category, ListView LstVw, uint CategoryID)
-        {
-            DataSet ds = new DataSet();
-            cMeals meals = new cMeals();
-
-            try
-            {
-                meals.CategoryID = CategoryID;
+                //meals.CategoryID = CategoryID;
                 ds = meals.specificMealGet(Category);
+                dsSize = ds.Tables[0].Rows.Count;
 
                 LstVw.Columns.Add("Name", 250, HorizontalAlignment.Left);
                 LstVw.Columns.Add("Price", 100, HorizontalAlignment.Left);
@@ -300,8 +381,93 @@ namespace POS
             finally
             {
                 ds.Dispose();
-            }
 
+            }
+            return dsSize;
+        }
+
+        private int LoadDifferentMealsIntoListView(ListView LstVw, string QuantityType)
+        {
+            DataSet ds = new DataSet();
+            cMeals meals = new cMeals();
+            int dsSize = 0;
+            try
+            {
+                //meals.QuanType = QuantityType;
+                ds = meals.specificMealGetByQuantity(QuantityType);
+                dsSize = ds.Tables[0].Rows.Count;
+
+                LstVw.Columns.Add("Name", 250, HorizontalAlignment.Left);
+                LstVw.Columns.Add("Price", 100, HorizontalAlignment.Left);
+                LstVw.Columns.Add("Quantity Type", 150, HorizontalAlignment.Left);
+
+                // Get the table from the data set
+                DataTable dtable = ds.Tables[0];
+                // or DataTable dtable = ds.Tables["Meals"];
+
+                // Clear the ListView control
+                LstVw.Items.Clear();
+
+                // Location of Large Icon images
+                //lstVwBrkfst.LargeImageList = imgLst;
+
+                // Display items in the ListView control
+                for (int i = 0; i < dtable.Rows.Count; i++)
+                {
+                    DataRow drow = dtable.Rows[i];
+
+                    // Only row that have not been deleted
+                    if (drow.RowState != DataRowState.Deleted)
+                    {
+                        // Define the list items
+                        ListViewItem lvi = new ListViewItem(drow["Name"].ToString().ToUpper());
+                        lvi.SubItems.Add(drow["Price"].ToString());
+                        lvi.SubItems.Add(drow["QuanType"].ToString());
+
+                        // Hold the id ---------------
+                        lvi.SubItems.Add(drow["MealID"].ToString());
+                        lvi.Name = drow["MealID"].ToString();
+
+                        // del add the hasstock here
+                        lvi.SubItems.Add(drow["HasStock"].ToString());
+
+
+                        lvi.ToolTipText = "Select this to choose " + drow["Name"].ToString();
+
+                        //imgLst = new ImageList();
+                        //Image j = new Image();
+                        //Bitmap image = new Bitmap(drow["Name"].ToString().Trim());
+                        //imgLst.Images.Add(Resources.ReferenceEquals());
+                        //-----------------------------------------------------
+
+
+
+                        // Text representing image
+                        lvi.ImageKey = drow["Name"].ToString().Trim() + ".jpg";
+
+                        //if the ImageList does not contain the key set it to the default
+                        if (!imgLst.Images.ContainsKey(lvi.ImageKey))
+                        {
+                            lvi.ImageIndex = 0;
+
+                        }
+
+                        // Add the list items to the ListView
+                        LstVw.Items.Add(lvi);
+
+                        //       this.Controls.Add(lstVwBrkfst);
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+            }
+            finally
+            {
+                ds.Dispose();
+            }
+            return dsSize;
         }
 
         private void LoadStaffDiscountView(ListView LstVw)
@@ -421,8 +587,9 @@ namespace POS
 
                     int qty = 1;
                     /////////////////get the multiplier////////////////////////
-                    if(multiplier.Contains("x") && Convert.ToInt16(multiplier.Substring(0,multiplier.IndexOf("x"))) > 0 ){
-                        qty = Convert.ToInt16(multiplier.Substring(0,multiplier.IndexOf("x")));
+                    if (multiplier.Contains("x") && Convert.ToInt16(multiplier.Substring(0, multiplier.IndexOf("x"))) > 0)
+                    {
+                        qty = Convert.ToInt16(multiplier.Substring(0, multiplier.IndexOf("x")));
 
 
                         /////// stock check considering multiplier
@@ -435,13 +602,10 @@ namespace POS
                     }
 
 
-
-
-
                     /////////////////multiplier///////////////////////////////
                     lvi.SubItems.Add(qty.ToString());    // Portions
-                    
-                    
+
+
                     lvi.SubItems.Add(selectedItems[0].SubItems[2].Text);    // qtytype
                     lvi.SubItems.Add((Convert.ToInt16(lvi.SubItems[2].Text) * Convert.ToDecimal(lvi.SubItems[1].Text)).ToString());    // subtotal 
 
@@ -475,7 +639,8 @@ namespace POS
 
         private void LoadBreakFast()
         {
-            LoadDifferentMealsIntoListView("Breakfast", lstVwBrkfst, 99);
+
+            LoadDifferentMealsIntoListView("Breakfast", lstVwBrkfst);
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -644,7 +809,7 @@ namespace POS
                 a.ShowDialog();
                 String qty = a.por().ToString();
 
-                
+
 
                 if (a.por() > 0 && stockCheck(selectedItems, lstVwItms, Convert.ToInt32(qty), true))
                 {
@@ -667,7 +832,7 @@ namespace POS
                     lvi.SubItems.Add(selectedItems[0].SubItems[6].Text);
 
 
-                    
+
 
                     lstVwItms.Items.Add(lvi);
                     lstVwItms.Items.Remove(selectedItems[0]);
@@ -723,10 +888,11 @@ namespace POS
 
         private void btnPrnt_Click(object sender, EventArgs e)
         {
+            Cursor.Current = Cursors.WaitCursor;
 
             Sale.transactionComplete = false;
 
-           
+
 
             calculateChange();
             if ((txtBChange.Text == "" || Convert.ToDecimal(txtBChange.Text) < 0 || lstVwItms.Items.Count <= 0 || Convert.ToDecimal(numCash.Text) < numTot.Value))
@@ -744,6 +910,9 @@ namespace POS
 
             Print prnt = new Print(lstVwItms, loggedUser, Convert.ToDecimal(numCash.Text), Convert.ToDecimal(txtBChange.Text));
             prnt.ShowDialog();
+
+            Cursor.Current = Cursors.Default;
+
         }
 
         private ListView list()
@@ -815,15 +984,15 @@ namespace POS
 
 
                     /////// stock check considering multiplier
-                    if (!(stockCheck(selectedItems,lst, qty)))
+                    if (!(stockCheck(selectedItems, lst, qty)))
                     {
                         return;
                     }
-                     /////////////////////////////////////////////////////
+                    /////////////////////////////////////////////////////
 
                 }
 
-               
+
 
                 lstVwItms.Items[selectedIntoListViewIndex].SubItems[2].Text = qty.ToString();
 
@@ -882,9 +1051,9 @@ namespace POS
                         qtyInSelectedList = qty;
                     }
 
-                   // multiplier = "0";
+                    // multiplier = "0";
                 }
-                
+
                 lstVwItms.Items[selectedIntoListViewIndex].Selected = true;
 
             }
@@ -930,7 +1099,7 @@ namespace POS
                 }
                 if (qtyLeft - qtyInSelectedList <= 0)
                 {
-                    MessageBox.Show("You can not purchase more of this product.\nTop up inventory.\n" + qtyLeft+ " left");
+                    MessageBox.Show("You can not purchase more of this product.\nTop up inventory.\n" + qtyLeft + " left");
                     status = false;
                 }
             }
@@ -1024,7 +1193,7 @@ namespace POS
                 }
                 if (qtyLeft - qtyToBuy < 0)
                 {
-                    MessageBox.Show("You can not purchase more of this product.\nTop up inventory\n"+ qtyLeft + " left.");
+                    MessageBox.Show("You can not purchase more of this product.\nTop up inventory\n" + qtyLeft + " left.");
                     status = false;
                 }
             }
@@ -1125,6 +1294,31 @@ namespace POS
             return status;
         }
 
+
+        private void listViewsDel_Click(object sender, EventArgs e)
+        {
+            ListView send = (ListView)sender;
+
+            var selectedItems = send.SelectedItems;
+
+            if (!stockCheck(selectedItems, send))
+            {
+                return;
+            }
+
+            if (!(selectedItems.Count > 0 && (lstVwItms.Items.ContainsKey(selectedItems[0].Name))))
+            {
+                ringItemsFromListViews(send);
+            }
+            else
+                itemClickedAgain(send);
+
+            afterEveryClickSelection();
+        }
+
+
+
+
         private void lstVwBrkfst_Click(object sender, EventArgs e)
         {
             var selectedItems = lstVwBrkfst.SelectedItems;
@@ -1143,7 +1337,7 @@ namespace POS
                 itemClickedAgain(lstVwBrkfst);
 
             afterEveryClickSelection();
-            
+
         }
 
         private void lstVwLnch_Click(object sender, EventArgs e)
@@ -1185,7 +1379,7 @@ namespace POS
         private void lstVwDnr_Click(object sender, EventArgs e)
         {
             var selectedItems = lstVwDeluxe.SelectedItems;
-            if (!stockCheck(selectedItems,lstVwDeluxe))
+            if (!stockCheck(selectedItems, lstVwDeluxe))
             {
                 return;
             }
@@ -1202,7 +1396,7 @@ namespace POS
         private void lstVwSngl_Click(object sender, EventArgs e)
         {
             var selectedItems = lstVwSngl.SelectedItems;
-            if (!stockCheck(selectedItems,lstVwSngl))
+            if (!stockCheck(selectedItems, lstVwSngl))
             {
                 return;
             }
@@ -1237,7 +1431,7 @@ namespace POS
             //}
 
             //else 
-                if (!stockCheck(selectedItems, lstVwSnck))
+            if (!stockCheck(selectedItems, lstVwSnck))
             {
                 return;
             }
@@ -1326,7 +1520,7 @@ namespace POS
             else
                 transactionComplete = false;
 
-           // totalUpdate();
+            // totalUpdate();
 
             calculateChange();
 
@@ -1342,7 +1536,7 @@ namespace POS
 
 
 
-       
+
 
         private void removeStartingZero()
         {
@@ -1529,8 +1723,12 @@ namespace POS
 
         private void btnClr_Click(object sender, EventArgs e)
         {
+            Cursor.Current = Cursors.WaitCursor;
+
             numCash.Text = "0";
             calculateChange();
+            Cursor.Current = Cursors.Default;
+
         }
 
         private void txtSearch_TextChanged(object sender, EventArgs e)
@@ -1598,7 +1796,7 @@ namespace POS
         private void btnMinus_Click(object sender, EventArgs e)
         {
             var selectedItems = lstVwItms.SelectedItems;
-            foreach( ListViewItem itm in selectedItems)
+            foreach (ListViewItem itm in selectedItems)
             //if (selectedItems.Count > 0)
             {
                 int qty = Convert.ToInt16(itm.SubItems[2].Text);

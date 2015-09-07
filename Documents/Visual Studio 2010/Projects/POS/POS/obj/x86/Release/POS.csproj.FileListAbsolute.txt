@@ -26,3 +26,4 @@ C:\Users\Kingston\documents\visual studio 2010\Projects\POS\POS\obj\x86\Release\
 C:\Users\Kingston\documents\visual studio 2010\Projects\POS\POS\obj\x86\Release\POS.exe
 C:\Users\Kingston\documents\visual studio 2010\Projects\POS\POS\obj\x86\Release\POS.pdb
 C:\Users\Kingston\documents\visual studio 2010\Projects\POS\POS\obj\x86\Release\POS.csprojResolveAssemblyReference.cache
+C:\Users\Kingston\documents\visual studio 2010\Projects\POS\POS\obj\x86\Release\POS.ItemTracker.resources

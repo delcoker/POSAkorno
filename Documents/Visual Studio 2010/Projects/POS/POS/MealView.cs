@@ -12,6 +12,8 @@ namespace POS
     public partial class MealView : Form
     {
         private cUsers loggedUser;
+        DataSet ds;
+
 
         private static int minNumericBox = -50;
         public MealView(cUsers user)
@@ -37,6 +39,9 @@ namespace POS
             llblLog.Text = loggedUser.UserName;
 
             updateFont();
+
+            txtSearch.GotFocus += new EventHandler(RemoveText);
+            txtSearch.LostFocus += new EventHandler(AddText);
         }
 
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
@@ -90,7 +95,7 @@ namespace POS
 
         private void LoadMeals()
         {
-            DataSet ds = new DataSet();
+            ds = new DataSet();
             cMeals meals = new cMeals();
            
             try
@@ -194,7 +199,7 @@ namespace POS
 
             ds = cat.CategoryGet();
 
-            ds.Tables[0].DefaultView.Sort = "Category asc";
+            //ds.Tables[0].DefaultView.Sort = "Category asc";
 
             cmbCtgy.DataSource = ds.Tables[0].DefaultView;
             cmbCtgy.ValueMember = "CategoryID";
@@ -250,7 +255,6 @@ namespace POS
             }
 
             cMeals meal = new cMeals();
-
             meal.MealID = Convert.ToUInt32(dgvCat["MealID", dgvCat.CurrentCell.RowIndex].Value);
             meal.Deleted = rdbDeleted.Checked;
             meal.Name = txtName.Text;
@@ -348,6 +352,36 @@ namespace POS
             
         }
 
+        private void txtSearch_TextChanged(object sender, EventArgs e)
+        {
+            if (txtSearch.Text != "Search...")
+            {
+                BindingSource bs = new BindingSource();
+                bs.DataSource = dgvCat.DataSource;
+                bs.Filter = "[Name] Like '%" + txtSearch.Text + "%'";
+                dgvCat.DataSource = bs;
+            }
 
+            //var bd = (BindingSource)dgvCat.DataSource;
+            //var dt = (DataTable)bd.DataSource;
+            //dt.DefaultView.RowFilter = string.Format("Field = '{0}'", txtSearch.Text.Trim().Replace("'", "''"));
+            //dgvCat.DataSource = bd;
+
+
+            //ds.Tables["Meals"].DefaultView.RowFilter = "Name = Alvaro";// +txtSearch.Text;
+            //dgvCat.DataSource = ds.Tables["Meals"];
+        }
+
+        //http://stackoverflow.com/questions/11873378/adding-placeholder-text-to-textbox
+        private void RemoveText(object sender, EventArgs e)
+        {
+            txtSearch.Text = "";
+        }
+
+        private void AddText(object sender, EventArgs e)
+        {
+            if (txtSearch.Text == "")
+                txtSearch.Text = "Search...";
+        }
     }
 }

@@ -52,8 +52,9 @@
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.pMealEdit = new System.Windows.Forms.Panel();
-            this.llblLog = new System.Windows.Forms.LinkLabel();
+            this.btnTrack = new System.Windows.Forms.Button();
             this.btnAddItem = new System.Windows.Forms.Button();
+            this.llblLog = new System.Windows.Forms.LinkLabel();
             ((System.ComponentModel.ISupportInitialize)(this.dgvInv)).BeginInit();
             this.pEdt.SuspendLayout();
             this.gpbx.SuspendLayout();
@@ -66,7 +67,7 @@
             // 
             this.btnAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.btnAdd.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAdd.Location = new System.Drawing.Point(6, 525);
+            this.btnAdd.Location = new System.Drawing.Point(6, 631);
             this.btnAdd.Name = "btnAdd";
             this.btnAdd.Size = new System.Drawing.Size(133, 31);
             this.btnAdd.TabIndex = 3;
@@ -102,7 +103,7 @@
             // 
             this.btnSave.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnSave.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnSave.Location = new System.Drawing.Point(604, 283);
+            this.btnSave.Location = new System.Drawing.Point(604, 272);
             this.btnSave.Name = "btnSave";
             this.btnSave.Size = new System.Drawing.Size(255, 94);
             this.btnSave.TabIndex = 1;
@@ -115,7 +116,7 @@
             // 
             this.btnDel.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.btnDel.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnDel.Location = new System.Drawing.Point(604, 160);
+            this.btnDel.Location = new System.Drawing.Point(604, 157);
             this.btnDel.Name = "btnDel";
             this.btnDel.Size = new System.Drawing.Size(255, 94);
             this.btnDel.TabIndex = 2;
@@ -129,7 +130,7 @@
             this.btnClose.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.btnClose.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btnClose.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnClose.Location = new System.Drawing.Point(604, 462);
+            this.btnClose.Location = new System.Drawing.Point(604, 568);
             this.btnClose.Name = "btnClose";
             this.btnClose.Size = new System.Drawing.Size(255, 94);
             this.btnClose.TabIndex = 4;
@@ -158,7 +159,8 @@
             this.dgvInv.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvInv.Location = new System.Drawing.Point(6, 43);
             this.dgvInv.Name = "dgvInv";
-            this.dgvInv.Size = new System.Drawing.Size(583, 333);
+            this.dgvInv.ReadOnly = true;
+            this.dgvInv.Size = new System.Drawing.Size(583, 439);
             this.dgvInv.TabIndex = 22;
             this.dgvInv.Click += new System.EventHandler(this.dgvInv_Click);
             // 
@@ -167,7 +169,7 @@
             this.dtpDtAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.dtpDtAdd.Enabled = false;
             this.dtpDtAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtpDtAdd.Location = new System.Drawing.Point(358, 534);
+            this.dtpDtAdd.Location = new System.Drawing.Point(358, 640);
             this.dtpDtAdd.Name = "dtpDtAdd";
             this.dtpDtAdd.Size = new System.Drawing.Size(231, 22);
             this.dtpDtAdd.TabIndex = 13;
@@ -192,7 +194,7 @@
             this.pEdt.Controls.Add(this.lblQty);
             this.pEdt.Controls.Add(this.cmbItems);
             this.pEdt.Controls.Add(this.numQty);
-            this.pEdt.Location = new System.Drawing.Point(6, 382);
+            this.pEdt.Location = new System.Drawing.Point(6, 488);
             this.pEdt.Name = "pEdt";
             this.pEdt.Size = new System.Drawing.Size(583, 135);
             this.pEdt.TabIndex = 27;
@@ -303,7 +305,7 @@
             // 
             // statusStrip1
             // 
-            this.statusStrip1.Location = new System.Drawing.Point(0, 559);
+            this.statusStrip1.Location = new System.Drawing.Point(0, 665);
             this.statusStrip1.Name = "statusStrip1";
             this.statusStrip1.Size = new System.Drawing.Size(862, 22);
             this.statusStrip1.TabIndex = 22;
@@ -311,6 +313,7 @@
             // 
             // pMealEdit
             // 
+            this.pMealEdit.Controls.Add(this.btnTrack);
             this.pMealEdit.Controls.Add(this.btnAddItem);
             this.pMealEdit.Controls.Add(this.pEdt);
             this.pMealEdit.Controls.Add(this.btnAdd);
@@ -324,8 +327,34 @@
             this.pMealEdit.Dock = System.Windows.Forms.DockStyle.Fill;
             this.pMealEdit.Location = new System.Drawing.Point(0, 0);
             this.pMealEdit.Name = "pMealEdit";
-            this.pMealEdit.Size = new System.Drawing.Size(862, 581);
+            this.pMealEdit.Size = new System.Drawing.Size(862, 687);
             this.pMealEdit.TabIndex = 24;
+            // 
+            // btnTrack
+            // 
+            this.btnTrack.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
+            this.btnTrack.Font = new System.Drawing.Font("Calibri", 18F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnTrack.Location = new System.Drawing.Point(604, 387);
+            this.btnTrack.Name = "btnTrack";
+            this.btnTrack.Size = new System.Drawing.Size(255, 94);
+            this.btnTrack.TabIndex = 29;
+            this.btnTrack.Tag = "3";
+            this.btnTrack.Text = "Track New Item";
+            this.btnTrack.UseVisualStyleBackColor = true;
+            this.btnTrack.Click += new System.EventHandler(this.btnTrack_Click);
+            // 
+            // btnAddItem
+            // 
+            this.btnAddItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnAddItem.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddItem.Location = new System.Drawing.Point(145, 631);
+            this.btnAddItem.Name = "btnAddItem";
+            this.btnAddItem.Size = new System.Drawing.Size(133, 31);
+            this.btnAddItem.TabIndex = 28;
+            this.btnAddItem.Tag = "3";
+            this.btnAddItem.Text = "View All &Items";
+            this.btnAddItem.UseVisualStyleBackColor = true;
+            this.btnAddItem.Click += new System.EventHandler(this.button1_Click);
             // 
             // llblLog
             // 
@@ -338,25 +367,12 @@
             this.llblLog.TabStop = true;
             this.llblLog.Text = "Log In?";
             // 
-            // btnAddItem
-            // 
-            this.btnAddItem.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnAddItem.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddItem.Location = new System.Drawing.Point(145, 525);
-            this.btnAddItem.Name = "btnAddItem";
-            this.btnAddItem.Size = new System.Drawing.Size(133, 31);
-            this.btnAddItem.TabIndex = 28;
-            this.btnAddItem.Tag = "3";
-            this.btnAddItem.Text = "Add New &Item";
-            this.btnAddItem.UseVisualStyleBackColor = true;
-            this.btnAddItem.Click += new System.EventHandler(this.button1_Click);
-            // 
             // InventoryView
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.CancelButton = this.btnClose;
-            this.ClientSize = new System.Drawing.Size(862, 581);
+            this.ClientSize = new System.Drawing.Size(862, 687);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.statusStrip1);
             this.Controls.Add(this.pMealEdit);
@@ -408,5 +424,6 @@
         private System.Windows.Forms.RadioButton rdbDeduct;
         private System.Windows.Forms.RadioButton rdbAddition;
         private System.Windows.Forms.Button btnAddItem;
+        private System.Windows.Forms.Button btnTrack;
     }
 }

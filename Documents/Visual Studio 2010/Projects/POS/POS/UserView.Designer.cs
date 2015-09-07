@@ -147,6 +147,7 @@
             this.dgvUsr.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvUsr.Location = new System.Drawing.Point(3, 19);
             this.dgvUsr.Name = "dgvUsr";
+            this.dgvUsr.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvUsr.Size = new System.Drawing.Size(654, 293);
             this.dgvUsr.TabIndex = 5;
             this.dgvUsr.TabStop = false;
@@ -188,6 +189,7 @@
             this.pCatV.Controls.Add(this.btnDel);
             this.pCatV.Controls.Add(this.btnSave);
             this.pCatV.Controls.Add(this.btnEdit);
+            this.pCatV.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.pCatV.Location = new System.Drawing.Point(0, 27);
             this.pCatV.Name = "pCatV";
             this.pCatV.Size = new System.Drawing.Size(858, 493);
@@ -213,6 +215,7 @@
             // 
             this.chkPassword.AutoCheck = false;
             this.chkPassword.AutoSize = true;
+            this.chkPassword.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.chkPassword.Location = new System.Drawing.Point(413, 108);
             this.chkPassword.Name = "chkPassword";
             this.chkPassword.Size = new System.Drawing.Size(112, 17);
@@ -226,6 +229,7 @@
             this.rdbDeactivated.AutoCheck = false;
             this.rdbDeactivated.AutoSize = true;
             this.rdbDeactivated.Checked = true;
+            this.rdbDeactivated.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rdbDeactivated.Location = new System.Drawing.Point(413, 14);
             this.rdbDeactivated.Name = "rdbDeactivated";
             this.rdbDeactivated.Size = new System.Drawing.Size(83, 17);
@@ -303,7 +307,7 @@
             this.btnDel.Name = "btnDel";
             this.btnDel.Size = new System.Drawing.Size(188, 86);
             this.btnDel.TabIndex = 1;
-            this.btnDel.Text = "Delete";
+            this.btnDel.Text = "DeActivate";
             this.btnDel.UseVisualStyleBackColor = true;
             this.btnDel.Click += new System.EventHandler(this.btnDel_Click);
             // 

@@ -288,5 +288,18 @@ namespace POS
             inv.ShowDialog();
             //LoadItems();
         }
+
+        private void btnTrack_Click(object sender, EventArgs e)
+        {
+            if (!loggedUser.access(Convert.ToInt16(btnTrack.Tag)))
+            {
+                return;
+            }
+            //this.Close();
+            //this.Dispose();
+            ItemTracker it = new ItemTracker(loggedUser);
+            it.ShowDialog();
+            LoadItems();
+        }
     }
 }

@@ -3,12 +3,14 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Xml;
+using System.IO;
 
 namespace POS
 {
     class cConstr
         {
         private string mConstr;
+        private string mServerName;
 
         public cConstr()
         {
@@ -17,21 +19,47 @@ namespace POS
 
 
             //mConstr = "Data Source=ABRA;Initial Catalog=Akorno;Integrated Security=True";
-        //ABRA PC
-         //   mConstr = System.IO.File.ReadAllText(@"..\..\conStr.txt");
+            //ABRA PC
+            //   mConstr = System.IO.File.ReadAllText(@"..\..\conStr.txt");
 
 
-        //    HOUSE-PC
-           mConstr = System.IO.File.ReadAllText(@"conStr.txt");
-           // mConstr = Console.ReadLine();
+            string path = "del.del";
+
+            if (!File.Exists(path))
+            {
+                AllocConsole();
+
+                
+                //File.Create(path);
+                TextWriter tw = new StreamWriter(path);
+                Console.WriteLine("Please key in server name carefully;\n");
+                tw.WriteLine(Console.ReadLine());
+                tw.Close();
+
+                
+            }
+
+            //    HOUSE-PC11111
+            mServerName = System.IO.File.ReadAllText(@"del.del");
+            mConstr = "Server=" + mServerName + "Database = Akorno; User Id =house-pc; Password =62131121;";
+
+            //mConstr = "Server=" + serverName + "Database = Akorno; User Id =house-pc; Password =62131121;";
+            // mConstr = Console.ReadLine();
             //updateConfigFile(mConstr);
             //System.Console.WriteLine("Contents of WriteText.txt = {0}", mConstr);
+
         }
 
         public string Constr
         {
-            get {return mConstr;}
-            set {value = mConstr;}
+            get { return mConstr; }
+            set { value = mConstr; }
+        }
+
+        public string ServerName
+        {
+            get { return mServerName; }
+            set { value = mServerName; }
         }
 
 

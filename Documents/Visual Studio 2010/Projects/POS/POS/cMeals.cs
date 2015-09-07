@@ -335,6 +335,34 @@ namespace POS
             }
         }
 
+        public DataSet mealsGetActive()
+        {
+            openConnection();
+            cmd.CommandText = "prc_MealsGetActive";
+
+            query("MealID", MealID);
+
+            DataSet ds = new DataSet();
+            try
+            {
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+
+                da.Fill(ds, "Meals");
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                throw ex;
+            }
+            finally
+            {
+                ds.Dispose();
+                con.Dispose();
+                con.Close();
+            }
+        }
+
         public DataSet specificMealGet(string Category)
         {
             openConnection();
@@ -391,7 +419,33 @@ namespace POS
             }
         }
 
-        
+        public DataSet specificMealGetByQuantity(string QuantityType)
+        {
+            openConnection();
+            cmd.CommandText = "prc_SpecificMealGetByQunatity";
+
+            query("@Quantype", QuantityType);
+
+            DataSet ds = new DataSet();
+            try
+            {
+                SqlDataAdapter da = new SqlDataAdapter(cmd);
+
+                da.Fill(ds, "Meals");
+                return ds;
+            }
+            catch (Exception ex)
+            {
+                MessageBox.Show(ex.Message);
+                throw ex;
+            }
+            finally
+            {
+                ds.Dispose();
+                con.Dispose();
+                con.Close();
+            }
+        }
 
         public DataSet specQtyTypeGet(string QtyType)
         {

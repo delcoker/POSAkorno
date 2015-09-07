@@ -154,6 +154,7 @@
             this.dgvCat.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCat.Location = new System.Drawing.Point(3, 3);
             this.dgvCat.Name = "dgvCat";
+            this.dgvCat.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCat.Size = new System.Drawing.Size(450, 254);
             this.dgvCat.TabIndex = 5;
             this.dgvCat.TabStop = false;

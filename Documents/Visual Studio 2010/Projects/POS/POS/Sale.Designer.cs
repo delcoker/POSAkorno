@@ -834,7 +834,7 @@
             this.btnLstVwChng.Anchor = System.Windows.Forms.AnchorStyles.Right;
             this.btnLstVwChng.Font = new System.Drawing.Font("Calibri", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnLstVwChng.ImageList = this.imgLst;
-            this.btnLstVwChng.Location = new System.Drawing.Point(701, 60);
+            this.btnLstVwChng.Location = new System.Drawing.Point(725, 60);
             this.btnLstVwChng.Name = "btnLstVwChng";
             this.btnLstVwChng.Size = new System.Drawing.Size(106, 25);
             this.btnLstVwChng.TabIndex = 6;

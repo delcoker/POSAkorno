@@ -66,10 +66,10 @@ namespace POS
                 dgvUsr.Columns[1].Width = 200;
                 dgvUsr.Columns[2].Width = 200;
                 //dgvUsr.Columns[3].Width = 150;
-                dgvUsr.Columns[4].Width = 150;
-                dgvUsr.Columns[5].Width = 150;
-                dgvUsr.Columns[6].Width = 150;
-                dgvUsr.Columns[6].Width = 150;
+                dgvUsr.Columns[4].Width = 250;
+                dgvUsr.Columns[5].Width = 250;
+                dgvUsr.Columns[6].Width = 200;
+                dgvUsr.Columns[6].Width = 200;
                 dgvUsr.Columns[7].Width = 80;
                 dgvUsr.Columns[8].Width = 120;
 

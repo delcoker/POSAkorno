@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.statusStrip1 = new System.Windows.Forms.StatusStrip();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.fileToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -35,6 +36,8 @@
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.aboutToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.pMealEdit = new System.Windows.Forms.Panel();
+            this.txtSearch = new System.Windows.Forms.TextBox();
+            this.btnStock = new System.Windows.Forms.Button();
             this.pEdt = new System.Windows.Forms.Panel();
             this.rdbDeleted = new System.Windows.Forms.RadioButton();
             this.rdbHaveStock = new System.Windows.Forms.RadioButton();
@@ -54,12 +57,17 @@
             this.dgvCat = new System.Windows.Forms.DataGridView();
             this.dtpDtAdd = new System.Windows.Forms.DateTimePicker();
             this.llblLog = new System.Windows.Forms.LinkLabel();
-            this.btnStock = new System.Windows.Forms.Button();
+            this.akornoDataSet = new POS.AkornoDataSet();
+            this.akornoDataSetBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.mealsBindingSource = new System.Windows.Forms.BindingSource(this.components);
             this.menuStrip1.SuspendLayout();
             this.pMealEdit.SuspendLayout();
             this.pEdt.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numPrice)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCat)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.akornoDataSet)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.akornoDataSetBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mealsBindingSource)).BeginInit();
             this.SuspendLayout();
             // 
             // statusStrip1
@@ -112,6 +120,7 @@
             // 
             // pMealEdit
             // 
+            this.pMealEdit.Controls.Add(this.txtSearch);
             this.pMealEdit.Controls.Add(this.btnStock);
             this.pMealEdit.Controls.Add(this.pEdt);
             this.pMealEdit.Controls.Add(this.btnAdd);
@@ -129,6 +138,31 @@
             this.pMealEdit.TabIndex = 20;
             this.pMealEdit.Paint += new System.Windows.Forms.PaintEventHandler(this.pMealEdit_Paint);
             // 
+            // txtSearch
+            // 
+            this.txtSearch.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
+            this.txtSearch.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txtSearch.Location = new System.Drawing.Point(498, 381);
+            this.txtSearch.MaxLength = 0;
+            this.txtSearch.Name = "txtSearch";
+            this.txtSearch.Size = new System.Drawing.Size(245, 26);
+            this.txtSearch.TabIndex = 40;
+            this.txtSearch.Text = "Search...";
+            this.txtSearch.TextChanged += new System.EventHandler(this.txtSearch_TextChanged);
+            // 
+            // btnStock
+            // 
+            this.btnStock.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.btnStock.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnStock.Location = new System.Drawing.Point(144, 548);
+            this.btnStock.Name = "btnStock";
+            this.btnStock.Size = new System.Drawing.Size(135, 31);
+            this.btnStock.TabIndex = 28;
+            this.btnStock.Tag = "4";
+            this.btnStock.Text = "Add S&tock";
+            this.btnStock.UseVisualStyleBackColor = true;
+            this.btnStock.Click += new System.EventHandler(this.btnStock_Click);
+            // 
             // pEdt
             // 
             this.pEdt.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
@@ -144,14 +178,14 @@
             this.pEdt.Controls.Add(this.numPrice);
             this.pEdt.Location = new System.Drawing.Point(3, 377);
             this.pEdt.Name = "pEdt";
-            this.pEdt.Size = new System.Drawing.Size(494, 165);
+            this.pEdt.Size = new System.Drawing.Size(476, 165);
             this.pEdt.TabIndex = 27;
             // 
             // rdbDeleted
             // 
             this.rdbDeleted.AutoCheck = false;
             this.rdbDeleted.AutoSize = true;
-            this.rdbDeleted.Location = new System.Drawing.Point(388, 47);
+            this.rdbDeleted.Location = new System.Drawing.Point(367, 47);
             this.rdbDeleted.Name = "rdbDeleted";
             this.rdbDeleted.Size = new System.Drawing.Size(74, 20);
             this.rdbDeleted.TabIndex = 22;
@@ -164,7 +198,7 @@
             // 
             this.rdbHaveStock.AutoCheck = false;
             this.rdbHaveStock.AutoSize = true;
-            this.rdbHaveStock.Location = new System.Drawing.Point(388, 9);
+            this.rdbHaveStock.Location = new System.Drawing.Point(367, 8);
             this.rdbHaveStock.Name = "rdbHaveStock";
             this.rdbHaveStock.Size = new System.Drawing.Size(98, 20);
             this.rdbHaveStock.TabIndex = 21;
@@ -328,6 +362,8 @@
             this.dgvCat.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dgvCat.Location = new System.Drawing.Point(3, 19);
             this.dgvCat.Name = "dgvCat";
+            this.dgvCat.ReadOnly = true;
+            this.dgvCat.SelectionMode = System.Windows.Forms.DataGridViewSelectionMode.FullRowSelect;
             this.dgvCat.Size = new System.Drawing.Size(740, 341);
             this.dgvCat.TabIndex = 22;
             this.dgvCat.Click += new System.EventHandler(this.dgvCat_Click);
@@ -337,9 +373,9 @@
             this.dtpDtAdd.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.dtpDtAdd.Enabled = false;
             this.dtpDtAdd.Font = new System.Drawing.Font("Microsoft Sans Serif", 9.75F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtpDtAdd.Location = new System.Drawing.Point(512, 557);
+            this.dtpDtAdd.Location = new System.Drawing.Point(533, 557);
             this.dtpDtAdd.Name = "dtpDtAdd";
-            this.dtpDtAdd.Size = new System.Drawing.Size(231, 22);
+            this.dtpDtAdd.Size = new System.Drawing.Size(210, 22);
             this.dtpDtAdd.TabIndex = 13;
             // 
             // llblLog
@@ -354,18 +390,19 @@
             this.llblLog.TabStop = true;
             this.llblLog.Text = "Log In?";
             // 
-            // btnStock
+            // akornoDataSet
             // 
-            this.btnStock.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.btnStock.Font = new System.Drawing.Font("Calibri", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnStock.Location = new System.Drawing.Point(144, 548);
-            this.btnStock.Name = "btnStock";
-            this.btnStock.Size = new System.Drawing.Size(135, 31);
-            this.btnStock.TabIndex = 28;
-            this.btnStock.Tag = "4";
-            this.btnStock.Text = "Add S&tock";
-            this.btnStock.UseVisualStyleBackColor = true;
-            this.btnStock.Click += new System.EventHandler(this.btnStock_Click);
+            this.akornoDataSet.DataSetName = "AkornoDataSet";
+            this.akornoDataSet.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
+            // 
+            // akornoDataSetBindingSource
+            // 
+            this.akornoDataSetBindingSource.DataSource = this.akornoDataSet;
+            this.akornoDataSetBindingSource.Position = 0;
+            // 
+            // mealsBindingSource
+            // 
+            this.mealsBindingSource.DataMember = "Meals";
             // 
             // MealView
             // 
@@ -385,10 +422,14 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.pMealEdit.ResumeLayout(false);
+            this.pMealEdit.PerformLayout();
             this.pEdt.ResumeLayout(false);
             this.pEdt.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numPrice)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dgvCat)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.akornoDataSet)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.akornoDataSetBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.mealsBindingSource)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -423,5 +464,9 @@
         private System.Windows.Forms.RadioButton rdbHaveStock;
         private System.Windows.Forms.RadioButton rdbDeleted;
         private System.Windows.Forms.Button btnStock;
+        private System.Windows.Forms.BindingSource akornoDataSetBindingSource;
+        private AkornoDataSet akornoDataSet;
+        private System.Windows.Forms.BindingSource mealsBindingSource;
+        private System.Windows.Forms.TextBox txtSearch;
     }
 }

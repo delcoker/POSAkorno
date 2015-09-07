@@ -103,12 +103,14 @@ namespace POS
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            if (keyboard != null && !keyboard.HasExited)
-            {
-                keyboard.Kill();
-                keyboard.Dispose();
-                keyboard = null;
-            }
+            //if (keyboard != null && !keyboard.HasExited)
+            //{
+            //    keyboard.Kill();
+            //    keyboard.Dispose();
+            //    keyboard = null;
+            //}
+
+            //Cursor.Current = Cursors.WaitCursor;
 
             if (Convert.ToInt16(cmbUsers.SelectedValue) == -1 || txtPassword.Text.Trim().Length == 0)
             {
@@ -246,10 +248,12 @@ namespace POS
                 }
                 catch (Exception ex)
                 {
-                    Cursor.Current = Cursors.Default;
+                    
                     MessageBox.Show(ex.Message);
 
                 }
+
+                Cursor.Current = Cursors.Default;
             }
         }
 
@@ -321,6 +325,15 @@ namespace POS
             txtPassword.Focus();
         }
 
-       
+        private void cmbUsers_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            highLight(txtPassword);
+        }
+
+        private void highLight(TextBox tb)
+        {
+            tb.Focus();
+            tb.Select(0, tb.Text.Length);
+        }
     }
 }

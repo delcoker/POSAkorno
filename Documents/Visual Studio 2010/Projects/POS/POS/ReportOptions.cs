@@ -39,6 +39,8 @@ namespace POS
 
         private void btnReport_Click(object sender, EventArgs e)
         {
+            Cursor.Current = Cursors.WaitCursor;
+
             cReports rpt = new cReports();
             //string Date = dtPickerStartDate.Value.Date.ToShortDateString();
             rpt.StartDate = (dtPickerStartDate.Value.Date+ tpStart.Value.TimeOfDay).ToString();
@@ -57,6 +59,9 @@ namespace POS
 
             ReportView rptVw = new ReportView(rpt, loggedUser);
             rptVw.Show();
+
+            Cursor.Current = Cursors.Default;
+
         }
 
         private void loadData()

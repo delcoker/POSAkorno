@@ -68,6 +68,7 @@
             this.cmbUsers.Name = "cmbUsers";
             this.cmbUsers.Size = new System.Drawing.Size(228, 28);
             this.cmbUsers.TabIndex = 18;
+            this.cmbUsers.SelectedIndexChanged += new System.EventHandler(this.cmbUsers_SelectedIndexChanged);
             // 
             // txtCopyRight
             // 
@@ -120,7 +121,6 @@
             this.txtPassword.PasswordChar = '*';
             this.txtPassword.Size = new System.Drawing.Size(228, 26);
             this.txtPassword.TabIndex = 14;
-            this.txtPassword.Click += new System.EventHandler(this.txtPassword_Click);
             this.txtPassword.KeyDown += new System.Windows.Forms.KeyEventHandler(this.txtPassword_KeyDown);
             // 
             // label2

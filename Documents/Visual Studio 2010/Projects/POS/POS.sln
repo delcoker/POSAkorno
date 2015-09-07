@@ -5,6 +5,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "POS", "POS\POS.csproj", "{1
 EndProject
 Project("{54435603-DBB4-11D2-8724-00A0C9A8B90C}") = "POSSetup", "POSSetup\POSSetup.vdproj", "{2A64500A-B555-4562-89C4-5B92415D3B25}"
 EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Solution Items", "Solution Items", "{7F74FC65-DF1D-42EF-81BD-9F78004C3356}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|x86 = Debug|x86

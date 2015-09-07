@@ -200,6 +200,8 @@ namespace POS
     
         private void btnPrnt_Click(object sender, EventArgs e)
         {
+            Cursor.Current = Cursors.WaitCursor;
+
             //if (txtBChange.Text == "" || Convert.ToDecimal(txtBChange.Text) < 0)
             //{
             //    MessageBox.Show("The change is below zero (0)");
@@ -314,6 +316,9 @@ namespace POS
             }
             Sale.transactionComplete = true;
             this.Close();
+
+            Cursor.Current = Cursors.Default;
+
         }
 
       
